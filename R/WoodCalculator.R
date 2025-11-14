@@ -10,7 +10,7 @@
 #' @param species Column within data where species is specified. NFI codes for species.
 #' @param func Calls function ungEqn1 or ungEqn2.
 #' @param appearance Column within data where tree appearance is specified.
-#' @param decay LOgical with default = TRUE. Should the decay class reduction factor be applied?
+#' @param decay Logical with default = TRUE. Should the decay class reduction factor be applied?
 #'
 #' @returns A vector 
 #' @export
