@@ -2,7 +2,7 @@
 % Please edit documentation in R/betaVal.R
 \name{betaVal}
 \alias{betaVal}
-\title{Internal function: Beta Values}
+\title{Internal Function: Beta Values}
 \usage{
 betaVal(method, species = species_spec, component = component_spec)
 }
@@ -18,7 +18,7 @@ Options are "LAMBERT_1", "LAMBERT_2", "UNG_1", "UNG_2".}
 A list of 2 or 3 beta values
 }
 \description{
-Internal function: Beta Values
+Internal Function: Beta Values
 }
 \examples{
 NA

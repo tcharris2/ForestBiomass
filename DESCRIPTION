@@ -1,5 +1,5 @@
 Package: ForestBiomass
-Title: Calculates forest biomass in temperate forests
+Title: Calculate forest biomass in temperate forests
 Version: 0.0.0.9000
 Authors@R: 
     person("Thomson", "Harris", , "thomsonharris@gmail.com", role = c("aut", "cre"))

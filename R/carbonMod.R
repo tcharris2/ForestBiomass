@@ -1,4 +1,4 @@
-#' Internal function: Biomass/Carbon output selection
+#' Internal Function: Biomass/Carbon output selection
 #'
 #' @param output "biomass" or "carbon" 
 #'

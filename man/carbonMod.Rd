@@ -2,7 +2,7 @@
 % Please edit documentation in R/carbonMod.R
 \name{carbonMod}
 \alias{carbonMod}
-\title{Internal function: Biomass/Carbon output selection}
+\title{Internal Function: Biomass/Carbon output selection}
 \usage{
 carbonMod(output)
 }
@@ -13,7 +13,7 @@ carbonMod(output)
 A parameter to modify function output to return either biomass (Kg) or carbon (Mg/ha)
 }
 \description{
-Internal function: Biomass/Carbon output selection
+Internal Function: Biomass/Carbon output selection
 }
 \examples{
 carbonMod("biomass")

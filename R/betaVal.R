@@ -1,4 +1,4 @@
-#' Internal function: Beta Values
+#' Internal Function: Beta Values
 #'
 #' @param method Dataframe within the package to retrive beta values from.
 #' Options are "LAMBERT_1", "LAMBERT_2", "UNG_1", "UNG_2". 
