@@ -1,4 +1,4 @@
-#' Decay Class Reduction Factor (DCRF)
+#' Internal function: Decay Class Reduction Factor (DCRF)
 #'
 #' @param data User dataframe.
 #' @param appearance Column from user dataframe where tree appearance is specified. 

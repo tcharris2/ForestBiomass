@@ -2,7 +2,7 @@
 % Please edit documentation in R/DCRF.R
 \name{DCRF}
 \alias{DCRF}
-\title{Decay Class Reduction Factor (DCRF)}
+\title{Internal function: Decay Class Reduction Factor (DCRF)}
 \usage{
 DCRF(data, appearance, species, i)
 }
@@ -20,7 +20,7 @@ Appearance codes correspond to Field Manual for Describing Terrestrial Ecosystem
 A decay modifer (numeric) corresponding to species and decay class
 }
 \description{
-Decay Class Reduction Factor (DCRF)
+Internal function: Decay Class Reduction Factor (DCRF)
 }
 \examples{
 NA

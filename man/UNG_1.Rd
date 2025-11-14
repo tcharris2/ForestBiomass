@@ -3,7 +3,7 @@
 \docType{data}
 \name{UNG_1}
 \alias{UNG_1}
-\title{Coefficients for allometric equations for DBH}
+\title{Data: Coefficients for allometric equations for DBH}
 \format{
 A data frame with 136 rows and 4 columns:
 \describe{
@@ -20,6 +20,6 @@ Values from Ung et al., 2008 Canadian national biomass equations: new parameter 
 UNG_1
 }
 \description{
-Coefficients for allometric equations for DBH
+Data: Coefficients for allometric equations for DBH
 }
 \keyword{datasets}

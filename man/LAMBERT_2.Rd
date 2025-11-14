@@ -3,7 +3,7 @@
 \docType{data}
 \name{LAMBERT_2}
 \alias{LAMBERT_2}
-\title{Coefficients for allometric equations for DBH and HEIGHT}
+\title{Data: Coefficients for allometric equations for DBH and HEIGHT}
 \format{
 A data frame with 432 rows and 4 columns:
 \describe{
@@ -20,6 +20,6 @@ Values from Lambert et al., 2005 Canadian national tree aboveground biomass equa
 LAMBERT_2
 }
 \description{
-Coefficients for allometric equations for DBH and HEIGHT
+Data: Coefficients for allometric equations for DBH and HEIGHT
 }
 \keyword{datasets}

@@ -1,4 +1,4 @@
-#' Coefficients for allometric equations for DBH and HEIGHT
+#' Data: Coefficients for allometric equations for DBH and HEIGHT
 #'
 #' @format
 #' A data frame with 204 rows and 4 columns:

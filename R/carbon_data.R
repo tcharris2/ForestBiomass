@@ -1,4 +1,4 @@
-#' Biomass or carbon modification parameter
+#' Data: Biomass or carbon modification parameter
 #'
 #' @format
 #' A data frame with 2 rows and 2 columns:

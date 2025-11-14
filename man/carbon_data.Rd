@@ -3,7 +3,7 @@
 \docType{data}
 \name{carbon_data}
 \alias{carbon_data}
-\title{Biomass or carbon modification parameter}
+\title{Data: Biomass or carbon modification parameter}
 \format{
 A data frame with 2 rows and 2 columns:
 \describe{
@@ -18,6 +18,6 @@ Created in house
 carbon_data
 }
 \description{
-Biomass or carbon modification parameter
+Data: Biomass or carbon modification parameter
 }
 \keyword{datasets}
