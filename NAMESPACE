@@ -3,4 +3,6 @@
 export(DCRF)
 export(betaVal)
 export(carbonMod)
+export(ungEqn1)
+export(ungEqn2)
 export(woodCalculator)
