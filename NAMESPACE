@@ -2,7 +2,10 @@
 
 export(DCRF)
 export(betaVal)
+export(branchCalc)
+export(branchCalculator)
 export(carbonMod)
 export(ungEqn1)
 export(ungEqn2)
+export(woodCalc)
 export(woodCalculator)

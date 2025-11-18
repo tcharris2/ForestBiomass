@@ -16,16 +16,16 @@ DCRF <- function(data, appearance, species, i){
   { 1 } else
     
     if(data[[appearance]][i] == 3)
-    { HARMON_2011$rel1[HARMON_2011$NFI_CODE == species] } else
+    {ForestBiomass::HARMON_2011$rel1[ForestBiomass::HARMON_2011$NFI_CODE == species] } else
       
       if(data[[appearance]][i] == 4)
-      { HARMON_2011$rel2[HARMON_2011$NFI_CODE == species] } else
+      {ForestBiomass::HARMON_2011$rel2[ForestBiomass::HARMON_2011$NFI_CODE == species] } else
         
         if(data[[appearance]][i] == 5)
-        { HARMON_2011$rel3[HARMON_2011$NFI_CODE == species] } else
+        {ForestBiomass::HARMON_2011$rel3[ForestBiomass::HARMON_2011$NFI_CODE == species] } else
           
           if(data[[appearance]][i] >= 6)
-          { HARMON_2011$rel4[HARMON_2011$NFI_CODE == species] }
+          {ForestBiomass::HARMON_2011$rel4[ForestBiomass::HARMON_2011$NFI_CODE == species] }
   
   return(dec_reduc)
   
