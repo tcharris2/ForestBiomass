@@ -10,9 +10,9 @@
 #' "lambert_eqn_1" for DBH based calculations, and "lambert_eqn_2" for DBH and Height based calculations. Use Ung equations for
 #' within British Columbia and use Lambert equations for species found in Eastern Canada.
 #' @param dbh Column within data where Diameter at Breast Height (dbh) is specified.
-#' @param height Column within data where Height is specified. 
+#' @param height Optional. Required if using lambert_eqn_2 or ung_eqn_2. Column within data where Height is specified. 
 #' @param species Column within data where species is specified. NFI codes for species.
-#' @param appearance Column within data where tree appearance is specified.
+#' @param appearance Optional. Required when decay = TRUE. Column within data where tree appearance is specified.
 #' @param output Either "biomass" (default) or "carbon". Biomass gives values in Kg. Carbon gives values in Mg/ha.
 #' @param decay Logical with default = TRUE. Should the decay class reduction factor be applied?
 #'
@@ -31,7 +31,7 @@
 #' 
 
 woodCalc <- function(data, eval = "ung_eqn_2",
-                     dbh, height, species, appearance,
+                     dbh, height = NULL, species, appearance = NULL,
                      output = "biomass", decay = TRUE){
   
   # Function checks ------------------------------------------------------------
@@ -52,6 +52,16 @@ woodCalc <- function(data, eval = "ung_eqn_2",
     rlang::abort("Species input does not match specifed method.
   Please see documentation for a complete list of species.")
   }
+  
+  # Validate inputs 
+  
+  if(!is.numeric(data[[dbh]])) {
+    stop("'dbh' must be a numeric vector.", call. = FALSE)
+  }
+  
+  #if(!is.numeric(data[[height]])) {
+   # stop("'height' must be a numeric vector.", call. = FALSE)
+  #}
   
   # NA checks
   
@@ -82,7 +92,7 @@ woodCalc <- function(data, eval = "ung_eqn_2",
   if(eval == "lambert_eqn_1") {
     
     do.call(ForestBiomass::woodCalculator, list(data, func = ungEqn1, method = LAMBERT_1, output,
-                                                dbh, height = NULL, appearance = appearance, species,
+                                                dbh, height = NULL, appearance = NULL, species,
                                                 decay))
   } else
     
@@ -90,7 +100,7 @@ woodCalc <- function(data, eval = "ung_eqn_2",
     if(eval == "lambert_eqn_2") {
       
       do.call(ForestBiomass::woodCalculator, list(data, func = ungEqn2, method = LAMBERT_2, output,
-                                                  dbh, height, appearance = appearance, species,
+                                                  dbh, height, appearance = NULL, species,
                                                   decay))
     } else
       
@@ -98,14 +108,14 @@ woodCalc <- function(data, eval = "ung_eqn_2",
       if(eval == "ung_eqn_1") {
         
         do.call(ForestBiomass::woodCalculator, list(data, func = ungEqn1, method = UNG_1, output,
-                                                    dbh, height = NULL, appearance = appearance, species,
+                                                    dbh, height = NULL, appearance = NULL, species,
                                                     decay))
       } else
         # Ung equation 2
         if(eval == "ung_eqn_2") {
           
           do.call(ForestBiomass::woodCalculator, list(data, func = ungEqn2, method = UNG_2, output,
-                                                      dbh, height, appearance = appearance, species,
+                                                      dbh, height, appearance = NULL, species,
                                                       decay))
           
         }
