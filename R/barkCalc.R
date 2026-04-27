@@ -1,0 +1,57 @@
+#' Bark Calculation
+#'
+#' @description Calculates bark biomass or carbon per tree given either DBH or DBH and Height.
+#' Calculations are done base on the allometric equations provided in Ung et al., 2008 or Lambert et al., 2005.
+#' A species specific decay class reduction factor can be applied (Harmon et al., 2011) if desired.
+#'
+#' @param data User specified dataframe.
+#' @param eval Which allomentic equation should be used? Default is "ung_eqn_2". Options are:
+#' "ung_eqn_1", "ung_eqn_2", "lambert_eqn_1", "lambert_eqn_2".
+#' @param dbh Column within data where Diameter at Breast Height (dbh) is specified.
+#' @param height Optional. Required for lambert_eqn_2 or ung_eqn_2.
+#' @param species Column within data where species is specified. NFI codes for species.
+#' @param appearance Optional. Required when decay = TRUE.
+#' @param rem_bark Optional. Column within data where remaining bark percentage (0-100) is specified.
+#' @param output Either "biomass" (default, kg) or "carbon" (Mg/ha).
+#' @param decay Logical with default = TRUE. Should the decay class reduction factor be applied?
+#'
+#' @returns A vector.
+#' @export
+#'
+#' @examples barkCalc(data = trees_data, eval = "ung_eqn_2", species = "LGTREE_NFI",
+#' dbh = "DBH", height = "HEIGHT", appearance = "APPEARANCE",
+#' rem_bark = "REM_BARK", output = "biomass", decay = TRUE)
+
+barkCalc <- function(data, eval = "ung_eqn_2",
+                     dbh, height = NULL, species, appearance = NULL, rem_bark = NULL,
+                     output = "biomass", decay = TRUE) {
+
+  if (!eval %in% c("ung_eqn_1", "ung_eqn_2", "lambert_eqn_1", "lambert_eqn_2"))
+    rlang::abort("Specified Method Not Available")
+
+  validateSpecies(data[[species]], eval)
+
+  if (!is.numeric(data[[dbh]]))
+    stop("'dbh' must be a numeric vector.", call. = FALSE)
+
+  if (any(is.na(data[[dbh]])))
+    message(paste("Warning: NAs detected in", dbh))
+
+  if (eval %in% c("lambert_eqn_2", "ung_eqn_2") && any(is.na(data[[height]])))
+    message(paste("Warning: NAs detected in", height))
+
+  message(paste("Output:", output, if (output == "biomass") "(kg)" else "(Mg/ha)"))
+  if (decay) message("Species specified decay reduction factor applied (Harmon et al., 2011)")
+
+  dispatch <- list(
+    lambert_eqn_1 = list(func = ungEqn, method = ForestBiomass::LAMBERT_1),
+    lambert_eqn_2 = list(func = ungEqn, method = ForestBiomass::LAMBERT_2),
+    ung_eqn_1    = list(func = ungEqn, method = ForestBiomass::UNG_1),
+    ung_eqn_2    = list(func = ungEqn, method = ForestBiomass::UNG_2)
+  )
+  sel <- dispatch[[eval]]
+  eqn_height <- if (eval %in% c("ung_eqn_1", "lambert_eqn_1")) NULL else height
+  barkCalculator(data, func = sel$func, method = sel$method, output = output,
+                 dbh = dbh, height = eqn_height, species = species,
+                 rem_bark = rem_bark, appearance = appearance, decay = decay)
+}
