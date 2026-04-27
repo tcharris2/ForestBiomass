@@ -30,7 +30,7 @@ branchCalculator <- function(data, method, output, dbh, height = NULL, species,
                                    ifelse(data[[crown_cond]][i] == 3, 0.5,
                                           ifelse(data[[crown_cond]][i] < 3, 1, 0))))
 
-    appearance_mod <- ifelse(data[[appearance]][i] > 5, 0, 1)
+    appearance_mod <- if (is.null(appearance)) 1 else ifelse(data[[appearance]][i] > 5, 0, 1)
 
     decay_mod <- if (decay) DCRF(data, appearance, species = species_spec, i) else 1
 
