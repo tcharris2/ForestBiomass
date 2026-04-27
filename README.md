@@ -3,15 +3,15 @@
 
 <img src="man/figures/mt-logo-workmark.png" width="433px" style="display: block; margin: auto;" />
 
-# MTP_Natural_Regen
+# Forest Biomass Package 
 
 <!-- badges: start -->
 <!-- badges: end -->
 
 Project Title: Forest Biomass
 
-Part of the Mother Tree Project (MTP) at the University of British
-Columbia (UBC).
+#Part of the Mother Tree Project (MTP) at the University of British
+#Columbia (UBC).
 
 Principal Author: Thomson Harris
 
