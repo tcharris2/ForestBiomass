@@ -49,15 +49,9 @@ woodCalc <- function(data, eval = "ung_eqn_2",
   message(paste("Output:", output, if (output == "biomass") "(kg)" else "(Mg/ha)"))
   if (decay) message("Species specified decay reduction factor applied (Harmon et al., 2011)")
 
-  dispatch <- list(
-    lambert_eqn_1 = list(func = ungEqn, method = ForestBiomass::LAMBERT_1),
-    lambert_eqn_2 = list(func = ungEqn, method = ForestBiomass::LAMBERT_2),
-    ung_eqn_1    = list(func = ungEqn, method = ForestBiomass::UNG_1),
-    ung_eqn_2    = list(func = ungEqn, method = ForestBiomass::UNG_2)
-  )
-  sel <- dispatch[[eval]]
+  sel <- resolveMethod(eval, height)
   woodCalculator(data, func = sel$func, method = sel$method, output = output,
-                 dbh = dbh, height = height, species = species,
+                 dbh = dbh, height = sel$height, species = species,
                  appearance = appearance, decay = decay)
 
 }

@@ -47,3 +47,4 @@ Internal Function: Branch Calculator helper function
 \examples{
 NA
 }
+\keyword{internal}

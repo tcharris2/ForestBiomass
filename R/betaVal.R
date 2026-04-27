@@ -6,7 +6,7 @@
 #' @param component one of "WOOD", "BARK", "BRANCHES" or "FOLIAGE".
 #'
 #' @returns A list of 2 or 3 beta values
-#' @export
+#' @keywords internal
 #'
 #' @examples NA
 

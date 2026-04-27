@@ -12,14 +12,14 @@
 #' @param decay Logical. Should the decay class reduction factor be applied?
 #'
 #' @returns A vector
-#' @export
+#' @keywords internal
 #'
 #' @examples NA
 
 barkCalculator <- function(data, method, output, dbh, height = NULL, species,
                            rem_bark = NULL, func, appearance = NULL, decay = TRUE) {
 
-  carbon_mod <- ForestBiomass::carbonMod(output)
+  carbon_mod <- carbonMod(output)
   bark_biomass <- c()
 
   for (i in seq_len(nrow(data))) {
@@ -27,9 +27,9 @@ barkCalculator <- function(data, method, output, dbh, height = NULL, species,
 
     bark_mod <- if (!is.null(rem_bark)) data[[rem_bark]][i] / 100 else 1
 
-    decay_mod <- if (decay) ForestBiomass::DCRF(data, appearance, species = species_spec, i) else 1
+    decay_mod <- if (decay) DCRF(data, appearance, species = species_spec, i) else 1
 
-    beta_list <- ForestBiomass::betaVal(method = method, species = species_spec, component = "BARK")
+    beta_list <- betaVal(method = method, species = species_spec, component = "BARK")
 
     bark_biomass[i] <- func(data, dbh, height, beta_list, i) * bark_mod * carbon_mod * decay_mod
   }

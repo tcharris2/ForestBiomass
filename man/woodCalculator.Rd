@@ -9,10 +9,10 @@ woodCalculator(
   method,
   output,
   dbh,
-  height,
+  height = NULL,
   species,
   func,
-  appearance,
+  appearance = NULL,
   decay = TRUE
 )
 }
@@ -30,7 +30,7 @@ Options are "LAMBERT_1", "LAMBERT_2", "UNG_1", "UNG_2".}
 
 \item{species}{Column within data where species is specified. NFI codes for species.}
 
-\item{func}{Calls function ungEqn1 or ungEqn2.}
+\item{func}{Calls function ungEqn.}
 
 \item{appearance}{Column within data where tree appearance is specified.}
 
@@ -45,3 +45,4 @@ Internal Function: Wood Calculator helper function
 \examples{
 NA
 }
+\keyword{internal}
