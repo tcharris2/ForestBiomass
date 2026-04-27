@@ -8,12 +8,12 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-Project Title: Natural regeneration analysis
+Project Title: Forest Biomass
 
 Part of the Mother Tree Project (MTP) at the University of British
 Columbia (UBC).
 
-Principal Investigator: Thomson Harris
+Principal Author: Thomson Harris
 
 Email - <thomsonharris@gmail.com>, <tc.harris@ubc.ca>
 
