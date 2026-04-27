@@ -28,6 +28,34 @@ test_that("treeCalc aborts when include_root = TRUE", {
   )
 })
 
+test_that("treeCalc aborts when height-based equation is used without height", {
+  expect_error(
+    treeCalc(tr_data, eval = "ung_eqn_2", species = "SPECIES", dbh = "DBH",
+             crown_cond = "CROWN_COND", output = "biomass", decay = FALSE),
+    regexp = "height"
+  )
+})
+
+test_that("treeCalc aborts when decay = TRUE and appearance is not provided", {
+  expect_error(
+    suppressMessages(
+      treeCalc(tr_data, eval = "ung_eqn_1", species = "SPECIES", dbh = "DBH",
+               crown_cond = "CROWN_COND", output = "biomass", decay = TRUE)
+    ),
+    regexp = "appearance"
+  )
+})
+
+test_that("treeCalc aborts on invalid output value", {
+  expect_error(
+    suppressMessages(
+      treeCalc(tr_data, eval = "ung_eqn_1", species = "SPECIES", dbh = "DBH",
+               crown_cond = "CROWN_COND", output = "invalid", decay = FALSE)
+    ),
+    regexp = "output"
+  )
+})
+
 test_that("treeCalc aborts when dbh is not numeric", {
   bad <- tr_data
   bad$DBH <- as.character(bad$DBH)

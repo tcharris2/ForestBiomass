@@ -21,6 +21,34 @@ test_that("barkCalc aborts for invalid species", {
   )
 })
 
+test_that("barkCalc aborts when height-based equation is used without height", {
+  expect_error(
+    barkCalc(bk_data, eval = "ung_eqn_2", species = "SPECIES", dbh = "DBH",
+             output = "biomass", decay = FALSE),
+    regexp = "height"
+  )
+})
+
+test_that("barkCalc aborts when decay = TRUE and appearance is not provided", {
+  expect_error(
+    suppressMessages(
+      barkCalc(bk_data, eval = "ung_eqn_1", species = "SPECIES", dbh = "DBH",
+               output = "biomass", decay = TRUE)
+    ),
+    regexp = "appearance"
+  )
+})
+
+test_that("barkCalc aborts on invalid output value", {
+  expect_error(
+    suppressMessages(
+      barkCalc(bk_data, eval = "ung_eqn_1", species = "SPECIES", dbh = "DBH",
+               output = "invalid", decay = FALSE)
+    ),
+    regexp = "output"
+  )
+})
+
 test_that("barkCalc returns numeric vector with one value per row", {
   result <- suppressMessages(
     barkCalc(bk_data, eval = "ung_eqn_1", species = "SPECIES",
