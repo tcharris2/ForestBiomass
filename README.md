@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<img src="man/figures/Designer.png" alt="" width="433px" style="display: block; margin: auto;" />
+<img src="man/figures/Designer2.png" alt="" width="433px" style="display: block; margin: auto;" />
 
 # Forest Biomass Package
 
