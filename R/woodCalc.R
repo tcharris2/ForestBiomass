@@ -57,6 +57,7 @@ woodCalc <- function(data, eval = "ung_eqn_2",
   )
   sel <- dispatch[[eval]]
   woodCalculator(data, func = sel$func, method = sel$method, output = output,
-                 dbh = dbh, height = height, species = species, decay = decay)
+                 dbh = dbh, height = height, species = species,
+                 appearance = appearance, decay = decay)
 
 }
