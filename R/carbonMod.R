@@ -3,7 +3,7 @@
 #' @param output "biomass" or "carbon" 
 #'
 #' @returns A parameter to modify function output to return either biomass (Kg) or carbon (Mg/ha)
-#' @export
+#' @keywords internal
 #'
 #' @examples carbonMod("biomass")
 

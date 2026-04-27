@@ -25,3 +25,4 @@ Internal function: Decay Class Reduction Factor (DCRF)
 \examples{
 NA
 }
+\keyword{internal}

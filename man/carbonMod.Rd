@@ -18,3 +18,4 @@ Internal Function: Biomass/Carbon output selection
 \examples{
 carbonMod("biomass")
 }
+\keyword{internal}

@@ -1,4 +1,4 @@
-#' Internal Function: Branch Calculator helper function
+#' Internal Function: Foliage Calculator helper function
 #'
 #' @param data User specified dataframe.
 #' @param method Dataframe within the package to retrieve beta values from.
@@ -16,11 +16,11 @@
 #'
 #' @examples NA
 
-branchCalculator <- function(data, method, output, dbh, height = NULL, species,
-                             crown_cond, func, appearance = NULL, decay = TRUE) {
+foliageCalculator <- function(data, method, output, dbh, height = NULL, species,
+                              crown_cond, func, appearance = NULL, decay = TRUE) {
 
   carbon_mod <- carbonMod(output)
-  branch_biomass <- c()
+  foliage_biomass <- c()
 
   for (i in seq_len(nrow(data))) {
     species_spec <- data[[species]][i]
@@ -34,10 +34,10 @@ branchCalculator <- function(data, method, output, dbh, height = NULL, species,
 
     decay_mod <- if (decay) DCRF(data, appearance, species = species_spec, i) else 1
 
-    beta_list <- betaVal(method = method, species = species_spec, component = "BRANCH")
+    beta_list <- betaVal(method = method, species = species_spec, component = "FOLIAGE")
 
-    branch_biomass[i] <- func(data, dbh, height, beta_list, i) * condition_mod * appearance_mod * carbon_mod * decay_mod
+    foliage_biomass[i] <- func(data, dbh, height, beta_list, i) * condition_mod * appearance_mod * carbon_mod * decay_mod
   }
 
-  return(branch_biomass)
+  return(foliage_biomass)
 }
