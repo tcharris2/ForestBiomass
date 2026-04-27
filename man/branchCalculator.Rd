@@ -9,35 +9,34 @@ branchCalculator(
   method,
   output,
   dbh,
-  height,
+  height = NULL,
   species,
   crown_cond,
-  appearance,
   func,
+  appearance = NULL,
   decay = TRUE
 )
 }
 \arguments{
 \item{data}{User specified dataframe.}
 
-\item{method}{Dataframe within the package to retrive beta values from.
-Options are "LAMBERT_1", "LAMBERT_2", "UNG_1", "UNG_2".}
+\item{method}{Dataframe within the package to retrieve beta values from.}
 
-\item{output}{Either "biomass" or "carbon". Biomass gives values in Kg. Carbon gives values in Mg/ha.}
+\item{output}{Either "biomass" or "carbon".}
 
-\item{dbh}{Column within data where Diameter at Breast Height (dbh) is specified.}
+\item{dbh}{Column within data where DBH is specified.}
 
 \item{height}{Column within data where Height is specified.}
 
-\item{species}{Column within data where species is specified. NFI codes for species.}
+\item{species}{Column within data where species is specified.}
 
 \item{crown_cond}{Column within data where crown condition is specified.}
 
+\item{func}{Calls function ungEqn.}
+
 \item{appearance}{Column within data where tree appearance is specified.}
 
-\item{func}{Calls function ungEqn1 or ungEqn2.}
-
-\item{decay}{Logical with default = TRUE. Should the decay class reduction factor be applied?}
+\item{decay}{Logical. Should the decay class reduction factor be applied?}
 }
 \value{
 A vector
