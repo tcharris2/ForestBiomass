@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<img src="man/figures/mt-logo-workmark.png" alt="" width="433px" style="display: block; margin: auto;" />
+<img src="man/figures/Designer.png" alt="" width="433px" style="display: block; margin: auto;" />
 
 # Forest Biomass Package
 
@@ -11,15 +11,17 @@
 
 Description: A package developed to convert field data to forest biomass
 
-Principal Author: Thomson Harris
+Principal Author: Thomson Harris - <thomsonharris@gmail.com>
 
-Email - <thomsonharris@gmail.com>,
+# Release State:
 
-Phone - 778-866-4198
+This package is under current development and changes are expected
+rapidly.
 
-# Purpose:
+# Current Uses:
 
-# Keywords:
+## Tree Biomass
 
-Forestry, Silviculture, Ecology, Climatic Distance, Assisted Migration,
-Climate Change
+Supported: - Woody stem - Foliage - Bark - Branches
+
+Undeveloped: - Roots

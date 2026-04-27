@@ -5,7 +5,7 @@ output: github_document
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, echo=FALSE, out.width="433px", fig.align="center"}
-knitr::include_graphics("man/figures/mt-logo-workmark.png")
+knitr::include_graphics("man/figures/Designer.png")
 ```
 
 # Forest Biomass Package
@@ -15,18 +15,25 @@ knitr::include_graphics("man/figures/mt-logo-workmark.png")
 
 Description: A package developed to convert field data to forest biomass
 
-Principal Author: Thomson Harris
-
-Email - thomsonharris@gmail.com, 
-
-Phone - 778-866-4198 
-
-# Purpose:
+Principal Author: Thomson Harris - thomsonharris@gmail.com
 
 
+# Release State:
 
-# Keywords:
+This package is under current development and changes are expected rapidly.  
 
-Forestry, Silviculture, Ecology, Climatic Distance, Assisted Migration, Climate Change
 
+
+# Current Uses:
+
+## Tree Biomass 
+
+Supported:
+- Woody stem
+- Foliage
+- Bark
+- Branches 
+
+Undeveloped:
+- Roots
 
