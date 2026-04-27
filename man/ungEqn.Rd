@@ -26,3 +26,4 @@ Internal Function: Allometric biomass equation (Ung et al., 2008)
 \examples{
 NA
 }
+\keyword{internal}

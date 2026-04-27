@@ -47,3 +47,4 @@ Internal Function: Bark Calculator helper function
 \examples{
 NA
 }
+\keyword{internal}

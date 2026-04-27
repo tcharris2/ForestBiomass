@@ -7,7 +7,7 @@
 #' @param i Row index for iterating.
 #'
 #' @returns Numeric value.
-#' @export
+#' @keywords internal
 #'
 #' @examples NA
 

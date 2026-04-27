@@ -7,7 +7,7 @@
 #' @param i Used for iterating.
 #'
 #' @returns A decay modifer (numeric) corresponding to species and decay class
-#' @export
+#' @keywords internal
 #'
 #' @examples NA
 DCRF <- function(data, appearance, species, i){

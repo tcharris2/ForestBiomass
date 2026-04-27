@@ -47,3 +47,4 @@ Internal Function: Foliage Calculator helper function
 \examples{
 NA
 }
+\keyword{internal}
