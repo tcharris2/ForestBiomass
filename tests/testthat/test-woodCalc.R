@@ -24,6 +24,34 @@ test_that("woodCalc aborts for species not in specified method", {
   )
 })
 
+test_that("woodCalc aborts when height-based equation is used without height", {
+  expect_error(
+    woodCalc(wd_data, eval = "ung_eqn_2", species = "SPECIES", dbh = "DBH",
+             output = "biomass", decay = FALSE),
+    regexp = "height"
+  )
+})
+
+test_that("woodCalc aborts when decay = TRUE and appearance is not provided", {
+  expect_error(
+    suppressMessages(
+      woodCalc(wd_data, eval = "ung_eqn_1", species = "SPECIES", dbh = "DBH",
+               output = "biomass", decay = TRUE)
+    ),
+    regexp = "appearance"
+  )
+})
+
+test_that("woodCalc aborts on invalid output value", {
+  expect_error(
+    suppressMessages(
+      woodCalc(wd_data, eval = "ung_eqn_1", species = "SPECIES", dbh = "DBH",
+               output = "invalid", decay = FALSE)
+    ),
+    regexp = "output"
+  )
+})
+
 test_that("woodCalc aborts when dbh column is not numeric", {
   bad <- wd_data
   bad$DBH <- as.character(bad$DBH)

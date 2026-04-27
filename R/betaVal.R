@@ -10,10 +10,7 @@
 #'
 #' @examples NA
 
-betaVal <- function(method, species = species_spec, component = component_spec) {
-  # UNG_df to be stored in the package
-  # species and component to be specified by the function above this one
-  
+betaVal <- function(method, species, component) {
   # Select correct beta values
   beta1 <- with(method, VALUE[SPECIES == species & COMPONENT == component & BETA_NUM == 1])
   

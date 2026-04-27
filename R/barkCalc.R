@@ -37,8 +37,18 @@ barkCalc <- function(data, eval = "ung_eqn_2",
   if (any(is.na(data[[dbh]])))
     message(paste("Warning: NAs detected in", dbh))
 
-  if (eval %in% c("lambert_eqn_2", "ung_eqn_2") && any(is.na(data[[height]])))
-    message(paste("Warning: NAs detected in", height))
+  if (eval %in% c("lambert_eqn_2", "ung_eqn_2")) {
+    if (is.null(height))
+      stop(paste0("'height' is required for ", eval, "."), call. = FALSE)
+    if (any(is.na(data[[height]])))
+      message(paste("Warning: NAs detected in", height))
+  }
+
+  if (!output %in% c("biomass", "carbon"))
+    rlang::abort("'output' must be \"biomass\" or \"carbon\".")
+
+  if (decay && is.null(appearance))
+    stop("'appearance' is required when decay = TRUE.", call. = FALSE)
 
   message(paste("Output:", output, if (output == "biomass") "(kg)" else "(Mg/ha)"))
   if (decay) message("Species specified decay reduction factor applied (Harmon et al., 2011)")
