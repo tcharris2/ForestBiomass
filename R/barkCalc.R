@@ -1,6 +1,6 @@
-#' Branch Calculation
+#' Bark Calculation
 #'
-#' @description Calculates branch biomass or carbon per tree given either DBH or DBH and Height.
+#' @description Calculates bark biomass or carbon per tree given either DBH or DBH and Height.
 #' Calculations are done base on the allometric equations provided in Ung et al., 2008 or Lambert et al., 2005.
 #' A species specific decay class reduction factor can be applied (Harmon et al., 2011) if desired.
 #'
@@ -11,20 +11,20 @@
 #' @param height Optional. Required for lambert_eqn_2 or ung_eqn_2.
 #' @param species Column within data where species is specified. NFI codes for species.
 #' @param appearance Optional. Required when decay = TRUE.
-#' @param crown_cond Column within data where crown condition is specified.
+#' @param rem_bark Optional. Column within data where remaining bark percentage (0-100) is specified.
 #' @param output Either "biomass" (default, kg) or "carbon" (Mg/ha).
 #' @param decay Logical with default = TRUE. Should the decay class reduction factor be applied?
 #'
 #' @returns A vector.
 #' @export
 #'
-#' @examples branchCalc(data = trees_data, eval = "ung_eqn_2", species = "LGTREE_NFI",
+#' @examples barkCalc(data = trees_data, eval = "ung_eqn_2", species = "LGTREE_NFI",
 #' dbh = "DBH", height = "HEIGHT", appearance = "APPEARANCE",
-#' crown_cond = "CROWN_COND", output = "biomass", decay = TRUE)
+#' rem_bark = "REM_BARK", output = "biomass", decay = TRUE)
 
-branchCalc <- function(data, eval = "ung_eqn_2",
-                       dbh, height = NULL, species, appearance = NULL, crown_cond,
-                       output = "biomass", decay = TRUE) {
+barkCalc <- function(data, eval = "ung_eqn_2",
+                     dbh, height = NULL, species, appearance = NULL, rem_bark = NULL,
+                     output = "biomass", decay = TRUE) {
 
   if (!eval %in% c("ung_eqn_1", "ung_eqn_2", "lambert_eqn_1", "lambert_eqn_2"))
     rlang::abort("Specified Method Not Available")
@@ -54,7 +54,7 @@ branchCalc <- function(data, eval = "ung_eqn_2",
   if (decay) message("Species specified decay reduction factor applied (Harmon et al., 2011)")
 
   sel <- resolveMethod(eval, height)
-  branchCalculator(data, func = sel$func, method = sel$method, output = output,
-                   dbh = dbh, height = sel$height, species = species,
-                   crown_cond = crown_cond, appearance = appearance, decay = decay)
+  barkCalculator(data, func = sel$func, method = sel$method, output = output,
+                 dbh = dbh, height = sel$height, species = species,
+                 rem_bark = rem_bark, appearance = appearance, decay = decay)
 }

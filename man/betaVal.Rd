@@ -23,3 +23,4 @@ Internal Function: Beta Values
 \examples{
 NA
 }
+\keyword{internal}

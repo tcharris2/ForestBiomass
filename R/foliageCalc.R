@@ -1,6 +1,6 @@
-#' Branch Calculation
+#' Foliage Calculation
 #'
-#' @description Calculates branch biomass or carbon per tree given either DBH or DBH and Height.
+#' @description Calculates foliage biomass or carbon per tree given either DBH or DBH and Height.
 #' Calculations are done base on the allometric equations provided in Ung et al., 2008 or Lambert et al., 2005.
 #' A species specific decay class reduction factor can be applied (Harmon et al., 2011) if desired.
 #'
@@ -18,13 +18,13 @@
 #' @returns A vector.
 #' @export
 #'
-#' @examples branchCalc(data = trees_data, eval = "ung_eqn_2", species = "LGTREE_NFI",
+#' @examples foliageCalc(data = trees_data, eval = "ung_eqn_2", species = "LGTREE_NFI",
 #' dbh = "DBH", height = "HEIGHT", appearance = "APPEARANCE",
 #' crown_cond = "CROWN_COND", output = "biomass", decay = TRUE)
 
-branchCalc <- function(data, eval = "ung_eqn_2",
-                       dbh, height = NULL, species, appearance = NULL, crown_cond,
-                       output = "biomass", decay = TRUE) {
+foliageCalc <- function(data, eval = "ung_eqn_2",
+                        dbh, height = NULL, species, appearance = NULL, crown_cond,
+                        output = "biomass", decay = TRUE) {
 
   if (!eval %in% c("ung_eqn_1", "ung_eqn_2", "lambert_eqn_1", "lambert_eqn_2"))
     rlang::abort("Specified Method Not Available")
@@ -54,7 +54,7 @@ branchCalc <- function(data, eval = "ung_eqn_2",
   if (decay) message("Species specified decay reduction factor applied (Harmon et al., 2011)")
 
   sel <- resolveMethod(eval, height)
-  branchCalculator(data, func = sel$func, method = sel$method, output = output,
-                   dbh = dbh, height = sel$height, species = species,
-                   crown_cond = crown_cond, appearance = appearance, decay = decay)
+  foliageCalculator(data, func = sel$func, method = sel$method, output = output,
+                    dbh = dbh, height = sel$height, species = species,
+                    crown_cond = crown_cond, appearance = appearance, decay = decay)
 }

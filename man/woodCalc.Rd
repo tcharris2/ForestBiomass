@@ -8,9 +8,9 @@ woodCalc(
   data,
   eval = "ung_eqn_2",
   dbh,
-  height,
+  height = NULL,
   species,
-  appearance,
+  appearance = NULL,
   output = "biomass",
   decay = TRUE
 )
@@ -25,11 +25,11 @@ within British Columbia and use Lambert equations for species found in Eastern C
 
 \item{dbh}{Column within data where Diameter at Breast Height (dbh) is specified.}
 
-\item{height}{Column within data where Height is specified.}
+\item{height}{Optional. Required if using lambert_eqn_2 or ung_eqn_2. Column within data where Height is specified.}
 
 \item{species}{Column within data where species is specified. NFI codes for species.}
 
-\item{appearance}{Column within data where tree appearance is specified.}
+\item{appearance}{Optional. Required when decay = TRUE. Column within data where tree appearance is specified.}
 
 \item{output}{Either "biomass" (default) or "carbon". Biomass gives values in Kg. Carbon gives values in Mg/ha.}
 
@@ -52,6 +52,4 @@ height = "HEIGHT",
 appearance = "APPEARANCE",
 output = "biomass",
 decay = TRUE)
-
-
 }
