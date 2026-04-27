@@ -3,4 +3,5 @@
 export(barkCalc)
 export(branchCalc)
 export(foliageCalc)
+export(treeCalc)
 export(woodCalc)
