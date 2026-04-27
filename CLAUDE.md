@@ -52,11 +52,9 @@ Species are identified using NFI (National Forest Inventory) codes.
 
 ## Current Implementation Status
 
-| Component | User function     | Status      |
-|-----------|------------------|-------------|
-| Wood      | `woodCalc()`     | Complete    |
-| Branches  | `branchCalc()`   | Complete    |
-| Foliage   | —                | Not started |
-| Bark      | —                | Not started |
-
-`branchCalc()` still uses `ungEqn1()` and `ungEqn2()`. Do not delete those files until `branchCalc` has been refactored to use the merged `ungEqn()`.
+| Component | User function       | Status   |
+|-----------|---------------------|----------|
+| Wood      | `woodCalc()`        | Complete |
+| Branches  | `branchCalc()`      | Complete |
+| Foliage   | `foliageCalc()`     | Complete |
+| Bark      | `barkCalc()`        | Complete |
