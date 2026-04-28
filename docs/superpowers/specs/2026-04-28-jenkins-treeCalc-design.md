@@ -174,12 +174,12 @@ and `rem_bark` arguments become unused when `eval = "jenkins"`.
 treeCalc <- function(data, eval = "ung_2",
                      dbh, height = NULL, species, appearance = NULL,
                      crown_cond = NULL, rem_bark = NULL,
-                     output = "biomass", decay = TRUE,
-                     include_root = FALSE)
+                     output = "biomass", decay = TRUE)
 ```
 
 Note: `crown_cond` becomes `NULL`-defaulted (previously required) to accommodate
-the Jenkins pathway cleanly.
+the Jenkins pathway cleanly. `include_root` is removed — root biomass will be
+handled by a dedicated `rootCalc()` function.
 
 ```r
 jenkinsCalculator <- function(data, dbh, species, appearance = NULL,
