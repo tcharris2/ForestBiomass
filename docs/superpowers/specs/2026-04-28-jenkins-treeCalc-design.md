@@ -82,25 +82,25 @@ where `bm` is biomass in kg and `DBH` is diameter at breast height in cm.
 | `BETA_0` | numeric | Intercept coefficient |
 | `BETA_1` | numeric | Slope coefficient |
 
-Ten rows — the nine original Jenkins et al. (2003) species groups plus one
+Eleven rows — the ten original Jenkins et al. (2003) species groups plus one
 in-house addition:
 
 | SPECIES_GROUP | BETA_0 | BETA_1 |
 |---------------|--------|--------|
-| Cedar/larch | — | — |
-| Douglas-fir | — | — |
-| True fir/hemlock | — | — |
-| Pine | — | — |
-| Spruce | — | — |
-| Aspen/alder/cottonwood/willow | — | — |
-| Soft maple/birch | — | — |
-| Mixed hardwood | — | — |
-| Hard maple/oak/hickory/beech | — | — |
-| Mixed softwood | avg(β₀) | avg(β₁) |
+| Cedar/larch | -2.0336 | 2.2592 |
+| Douglas-fir | -2.2304 | 2.4435 |
+| True fir/hemlock | -2.5384 | 2.4814 |
+| Pine | -2.5356 | 2.4249 |
+| Spruce | -2.0773 | 2.3323 |
+| Aspen/alder/cottonwood/willow | -2.2094 | 2.3867 |
+| Soft maple/birch | -1.9123 | 2.3651 |
+| Mixed hardwood | -2.4800 | 2.4835 |
+| Hard maple/oak/hickory/beech | -2.0127 | 2.4342 |
+| Juniper/oak/mesquite | -0.7152 | 1.7029 |
+| Mixed softwood | -2.2831 | 2.3883 |
 
-**Note:** β₀ and β₁ values must be transcribed from Jenkins et al. (2003) Table 4
-before implementation. "Mixed softwood" coefficients are computed as the arithmetic
-mean of β₀ and β₁ across Cedar/larch, Douglas-fir, True fir/hemlock, Pine, and Spruce.
+"Mixed softwood" coefficients are the arithmetic mean of β₀ and β₁ across
+Cedar/larch, Douglas-fir, True fir/hemlock, Pine, and Spruce.
 
 ---
 
