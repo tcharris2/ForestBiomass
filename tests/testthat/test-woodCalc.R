@@ -20,13 +20,13 @@ test_that("woodCalc aborts on invalid eval method", {
 test_that("woodCalc aborts for species not in specified method", {
   bad <- data.frame(SPECIES = "INVALID_SP", DBH = 10.0)
   expect_error(
-    woodCalc(bad, eval = "ung_eqn_1", species = "SPECIES", dbh = "DBH")
+    woodCalc(bad, eval = "ung_1", species = "SPECIES", dbh = "DBH")
   )
 })
 
 test_that("woodCalc aborts when height-based equation is used without height", {
   expect_error(
-    woodCalc(wd_data, eval = "ung_eqn_2", species = "SPECIES", dbh = "DBH",
+    woodCalc(wd_data, eval = "ung_2", species = "SPECIES", dbh = "DBH",
              output = "biomass", decay = FALSE),
     regexp = "height"
   )
@@ -35,7 +35,7 @@ test_that("woodCalc aborts when height-based equation is used without height", {
 test_that("woodCalc aborts when decay = TRUE and appearance is not provided", {
   expect_error(
     suppressMessages(
-      woodCalc(wd_data, eval = "ung_eqn_1", species = "SPECIES", dbh = "DBH",
+      woodCalc(wd_data, eval = "ung_1", species = "SPECIES", dbh = "DBH",
                output = "biomass", decay = TRUE)
     ),
     regexp = "appearance"
@@ -45,7 +45,7 @@ test_that("woodCalc aborts when decay = TRUE and appearance is not provided", {
 test_that("woodCalc aborts on invalid output value", {
   expect_error(
     suppressMessages(
-      woodCalc(wd_data, eval = "ung_eqn_1", species = "SPECIES", dbh = "DBH",
+      woodCalc(wd_data, eval = "ung_1", species = "SPECIES", dbh = "DBH",
                output = "invalid", decay = FALSE)
     ),
     regexp = "output"
@@ -57,7 +57,7 @@ test_that("woodCalc aborts when dbh column is not numeric", {
   bad$DBH <- as.character(bad$DBH)
   expect_error(
     suppressMessages(
-      woodCalc(bad, eval = "ung_eqn_1", species = "SPECIES", dbh = "DBH")
+      woodCalc(bad, eval = "ung_1", species = "SPECIES", dbh = "DBH")
     ),
     regexp = "numeric"
   )
@@ -67,7 +67,7 @@ test_that("woodCalc warns when NAs present in DBH", {
   na_data <- wd_data
   na_data$DBH[1] <- NA
   expect_message(
-    woodCalc(na_data, eval = "ung_eqn_1", species = "SPECIES",
+    woodCalc(na_data, eval = "ung_1", species = "SPECIES",
              dbh = "DBH", output = "biomass", decay = FALSE),
     regexp = "NAs"
   )
@@ -77,7 +77,7 @@ test_that("woodCalc warns when NAs present in DBH", {
 
 test_that("woodCalc returns a numeric vector with one value per row", {
   result <- suppressMessages(
-    woodCalc(wd_data, eval = "ung_eqn_1", species = "SPECIES",
+    woodCalc(wd_data, eval = "ung_1", species = "SPECIES",
              dbh = "DBH", output = "biomass", decay = FALSE)
   )
   expect_type(result, "double")
@@ -86,7 +86,7 @@ test_that("woodCalc returns a numeric vector with one value per row", {
 
 test_that("woodCalc returns positive biomass values", {
   result <- suppressMessages(
-    woodCalc(wd_data, eval = "ung_eqn_1", species = "SPECIES",
+    woodCalc(wd_data, eval = "ung_1", species = "SPECIES",
              dbh = "DBH", output = "biomass", decay = FALSE)
   )
   expect_true(all(result > 0))
@@ -94,11 +94,11 @@ test_that("woodCalc returns positive biomass values", {
 
 test_that("woodCalc carbon output is less than biomass output", {
   biomass <- suppressMessages(
-    woodCalc(wd_data, eval = "ung_eqn_1", species = "SPECIES",
+    woodCalc(wd_data, eval = "ung_1", species = "SPECIES",
              dbh = "DBH", output = "biomass", decay = FALSE)
   )
   carbon <- suppressMessages(
-    woodCalc(wd_data, eval = "ung_eqn_1", species = "SPECIES",
+    woodCalc(wd_data, eval = "ung_1", species = "SPECIES",
              dbh = "DBH", output = "carbon", decay = FALSE)
   )
   expect_true(all(carbon < biomass))
@@ -106,11 +106,11 @@ test_that("woodCalc carbon output is less than biomass output", {
 
 test_that("ung_eqn_2 and ung_eqn_1 return different values", {
   eqn1 <- suppressMessages(
-    woodCalc(wd_data, eval = "ung_eqn_1", species = "SPECIES",
+    woodCalc(wd_data, eval = "ung_1", species = "SPECIES",
              dbh = "DBH", output = "biomass", decay = FALSE)
   )
   eqn2 <- suppressMessages(
-    woodCalc(wd_data, eval = "ung_eqn_2", species = "SPECIES",
+    woodCalc(wd_data, eval = "ung_2", species = "SPECIES",
              dbh = "DBH", height = "HEIGHT", output = "biomass", decay = FALSE)
   )
   expect_false(identical(eqn1, eqn2))
@@ -119,11 +119,11 @@ test_that("ung_eqn_2 and ung_eqn_1 return different values", {
 test_that("decay = TRUE produces different results than decay = FALSE for decayed trees", {
   # Row 2 has APPEARANCE = 4 (decay class), so decay should reduce its value
   no_decay <- suppressMessages(
-    woodCalc(wd_data, eval = "ung_eqn_1", species = "SPECIES",
+    woodCalc(wd_data, eval = "ung_1", species = "SPECIES",
              dbh = "DBH", appearance = "APPEARANCE", output = "biomass", decay = FALSE)
   )
   with_decay <- suppressMessages(
-    woodCalc(wd_data, eval = "ung_eqn_1", species = "SPECIES",
+    woodCalc(wd_data, eval = "ung_1", species = "SPECIES",
              dbh = "DBH", appearance = "APPEARANCE", output = "biomass", decay = TRUE)
   )
   expect_true(with_decay[2] < no_decay[2])
@@ -133,7 +133,7 @@ test_that("decay = TRUE produces different results than decay = FALSE for decaye
 test_that("woodCalc returns correct known value for PSEU_MEN with ung_eqn_1", {
   single <- data.frame(SPECIES = "PSEU_MEN", DBH = 10.0)
   result <- suppressMessages(
-    woodCalc(single, eval = "ung_eqn_1", species = "SPECIES",
+    woodCalc(single, eval = "ung_1", species = "SPECIES",
              dbh = "DBH", output = "biomass", decay = FALSE)
   )
   # From ung1data.R: PSEU_MEN WOOD beta1=0.0204, beta2=2.6974

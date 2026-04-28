@@ -5,10 +5,10 @@
 #' A species specific decay class reduction factor can be applied (Harmon et al., 2011) if desired.
 #'
 #' @param data User specified dataframe.
-#' @param eval Which allomentic equation should be used? Default is "ung_eqn_2". Options are:
-#' "ung_eqn_1", "ung_eqn_2", "lambert_eqn_1", "lambert_eqn_2".
+#' @param eval Which allomentic equation should be used? Default is "ung_2". Options are:
+#' "ung_1", "ung_2", "lambert_1", "lambert_2".
 #' @param dbh Column within data where Diameter at Breast Height (dbh) is specified.
-#' @param height Optional. Required for lambert_eqn_2 or ung_eqn_2.
+#' @param height Optional. Required for lambert_2 or ung_2.
 #' @param species Column within data where species is specified. NFI codes for species.
 #' @param appearance Optional. Required when decay = TRUE.
 #' @param crown_cond Column within data where crown condition is specified.
@@ -18,15 +18,15 @@
 #' @returns A vector.
 #' @export
 #'
-#' @examples branchCalc(data = trees_data, eval = "ung_eqn_2", species = "LGTREE_NFI",
+#' @examples branchCalc(data = trees_data, eval = "ung_2", species = "LGTREE_NFI",
 #' dbh = "DBH", height = "HEIGHT", appearance = "APPEARANCE",
 #' crown_cond = "CROWN_COND", output = "biomass", decay = TRUE)
 
-branchCalc <- function(data, eval = "ung_eqn_2",
+branchCalc <- function(data, eval = "ung_2",
                        dbh, height = NULL, species, appearance = NULL, crown_cond,
                        output = "biomass", decay = TRUE) {
 
-  if (!eval %in% c("ung_eqn_1", "ung_eqn_2", "lambert_eqn_1", "lambert_eqn_2"))
+  if (!eval %in% c("ung_1", "ung_2", "lambert_1", "lambert_2"))
     rlang::abort("Specified Method Not Available")
 
   validateSpecies(data[[species]], eval)
@@ -37,7 +37,7 @@ branchCalc <- function(data, eval = "ung_eqn_2",
   if (any(is.na(data[[dbh]])))
     message(paste("Warning: NAs detected in", dbh))
 
-  if (eval %in% c("lambert_eqn_2", "ung_eqn_2")) {
+  if (eval %in% c("lambert_2", "ung_2")) {
     if (is.null(height))
       stop(paste0("'height' is required for ", eval, "."), call. = FALSE)
     if (any(is.na(data[[height]])))

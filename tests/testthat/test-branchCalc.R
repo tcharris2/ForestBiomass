@@ -22,7 +22,7 @@ test_that("branchCalc aborts for invalid species", {
   bad <- data.frame(SPECIES = "INVALID", DBH = 10.0, HEIGHT = 10.0,
                     APPEARANCE = 1, CROWN_COND = 1)
   expect_error(
-    branchCalc(bad, eval = "ung_eqn_1", species = "SPECIES",
+    branchCalc(bad, eval = "ung_1", species = "SPECIES",
                dbh = "DBH", height = "HEIGHT", crown_cond = "CROWN_COND",
                appearance = "APPEARANCE")
   )
@@ -30,7 +30,7 @@ test_that("branchCalc aborts for invalid species", {
 
 test_that("branchCalc aborts when height-based equation is used without height", {
   expect_error(
-    branchCalc(br_data, eval = "ung_eqn_2", species = "SPECIES", dbh = "DBH",
+    branchCalc(br_data, eval = "ung_2", species = "SPECIES", dbh = "DBH",
                crown_cond = "CROWN_COND", output = "biomass", decay = FALSE),
     regexp = "height"
   )
@@ -39,7 +39,7 @@ test_that("branchCalc aborts when height-based equation is used without height",
 test_that("branchCalc aborts when decay = TRUE and appearance is not provided", {
   expect_error(
     suppressMessages(
-      branchCalc(br_data, eval = "ung_eqn_1", species = "SPECIES", dbh = "DBH",
+      branchCalc(br_data, eval = "ung_1", species = "SPECIES", dbh = "DBH",
                  crown_cond = "CROWN_COND", output = "biomass", decay = TRUE)
     ),
     regexp = "appearance"
@@ -49,7 +49,7 @@ test_that("branchCalc aborts when decay = TRUE and appearance is not provided", 
 test_that("branchCalc aborts on invalid output value", {
   expect_error(
     suppressMessages(
-      branchCalc(br_data, eval = "ung_eqn_1", species = "SPECIES", dbh = "DBH",
+      branchCalc(br_data, eval = "ung_1", species = "SPECIES", dbh = "DBH",
                  crown_cond = "CROWN_COND", output = "invalid", decay = FALSE)
     ),
     regexp = "output"
@@ -60,7 +60,7 @@ test_that("branchCalc aborts on invalid output value", {
 
 test_that("branchCalc returns numeric vector with one value per row", {
   result <- suppressMessages(
-    branchCalc(br_data, eval = "ung_eqn_1", species = "SPECIES",
+    branchCalc(br_data, eval = "ung_1", species = "SPECIES",
                dbh = "DBH", height = "HEIGHT", crown_cond = "CROWN_COND",
                appearance = "APPEARANCE", output = "biomass", decay = FALSE)
   )
@@ -70,12 +70,12 @@ test_that("branchCalc returns numeric vector with one value per row", {
 
 test_that("branchCalc carbon output is less than biomass output", {
   biomass <- suppressMessages(
-    branchCalc(br_data, eval = "ung_eqn_1", species = "SPECIES",
+    branchCalc(br_data, eval = "ung_1", species = "SPECIES",
                dbh = "DBH", height = "HEIGHT", crown_cond = "CROWN_COND",
                appearance = "APPEARANCE", output = "biomass", decay = FALSE)
   )
   carbon <- suppressMessages(
-    branchCalc(br_data, eval = "ung_eqn_1", species = "SPECIES",
+    branchCalc(br_data, eval = "ung_1", species = "SPECIES",
                dbh = "DBH", height = "HEIGHT", crown_cond = "CROWN_COND",
                appearance = "APPEARANCE", output = "carbon", decay = FALSE)
   )
@@ -86,7 +86,7 @@ test_that("branchCalc returns correct known value for PSEU_MEN with ung_eqn_1", 
   single <- data.frame(SPECIES = "PSEU_MEN", DBH = 10.0, HEIGHT = 10.0,
                        APPEARANCE = 1, CROWN_COND = 1)
   result <- suppressMessages(
-    branchCalc(single, eval = "ung_eqn_1", species = "SPECIES",
+    branchCalc(single, eval = "ung_1", species = "SPECIES",
                dbh = "DBH", height = "HEIGHT", crown_cond = "CROWN_COND",
                appearance = "APPEARANCE", output = "biomass", decay = FALSE)
   )
