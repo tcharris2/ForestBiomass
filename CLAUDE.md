@@ -25,7 +25,7 @@ Species are identified using NFI (National Forest Inventory) codes.
 
 - **Default branch for all changes is `dev`** unless explicitly told otherwise.
 - **Always use PowerShell** (not bash) for git commands. The project path contains spaces (`OneDrive - UBC`) which prevents bash git commands from producing output.
-- Commit and push to `dev` after completing changes.
+- Commit to `dev` after completing changes, but **do not push to GitHub until the user explicitly confirms the work is finalized**.
 - Do not push to `main` unless explicitly instructed.
 
 ---
@@ -58,3 +58,4 @@ Species are identified using NFI (National Forest Inventory) codes.
 | Branches  | `branchCalc()`      | Complete |
 | Foliage   | `foliageCalc()`     | Complete |
 | Bark      | `barkCalc()`        | Complete |
+| Total AGB | `treeCalc()`        | Complete (Ung, Lambert, Jenkins) |
