@@ -27,6 +27,9 @@
 #' @examples treeCalc(data = trees_data, eval = "ung_2", species = "LGTREE_NFI",
 #' dbh = "DBH", height = "HEIGHT", appearance = "APPEARANCE",
 #' crown_cond = "CROWN_COND", output = "biomass", decay = TRUE)
+#'
+#' treeCalc(data = trees_data, eval = "jenkins", species = "LGTREE_NFI",
+#' dbh = "DBH", appearance = "APPEARANCE", output = "biomass", decay = TRUE)
 
 treeCalc <- function(data, eval = "ung_2",
                      dbh, height = NULL, species, appearance = NULL,
