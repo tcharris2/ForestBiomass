@@ -92,7 +92,7 @@ test_that("barkCalc with rem_bark = 50 returns half the value of rem_bark = 100"
   expect_equal(r_half, r_full * 0.5, tolerance = 1e-6)
 })
 
-test_that("barkCalc returns correct known value for PSEU_MEN ung_eqn_1 full bark", {
+test_that("barkCalc returns correct known value for PSEU_MEN ung_1 full bark", {
   single <- data.frame(SPECIES = "PSEU_MEN", DBH = 10.0, REM_BARK = 100, APPEARANCE = 1)
   result <- suppressMessages(
     barkCalc(single, eval = "ung_1", species = "SPECIES",

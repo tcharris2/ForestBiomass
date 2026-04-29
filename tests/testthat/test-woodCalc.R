@@ -104,7 +104,7 @@ test_that("woodCalc carbon output is less than biomass output", {
   expect_true(all(carbon < biomass))
 })
 
-test_that("ung_eqn_2 and ung_eqn_1 return different values", {
+test_that("ung_2 and ung_1 return different values", {
   eqn1 <- suppressMessages(
     woodCalc(wd_data, eval = "ung_1", species = "SPECIES",
              dbh = "DBH", output = "biomass", decay = FALSE)
@@ -130,7 +130,7 @@ test_that("decay = TRUE produces different results than decay = FALSE for decaye
   expect_equal(with_decay[1], no_decay[1])  # appearance=1, no reduction
 })
 
-test_that("woodCalc returns correct known value for PSEU_MEN with ung_eqn_1", {
+test_that("woodCalc returns correct known value for PSEU_MEN with ung_1", {
   single <- data.frame(SPECIES = "PSEU_MEN", DBH = 10.0)
   result <- suppressMessages(
     woodCalc(single, eval = "ung_1", species = "SPECIES",

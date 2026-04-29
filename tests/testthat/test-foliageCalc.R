@@ -96,7 +96,7 @@ test_that("foliageCalc returns 0 for snag (appearance > 5)", {
   expect_equal(result, 0)
 })
 
-test_that("foliageCalc returns correct known value for PSEU_MEN ung_eqn_1", {
+test_that("foliageCalc returns correct known value for PSEU_MEN ung_1", {
   single <- data.frame(SPECIES = "PSEU_MEN", DBH = 10.0, HEIGHT = 10.0,
                        APPEARANCE = 1, CROWN_COND = 1)
   result <- suppressMessages(
