@@ -10,20 +10,16 @@ jk_data <- data.frame(
 
 test_that("treeCalc warns when crown_cond supplied with eval = 'jenkins'", {
   expect_message(
-    suppressMessages(
-      treeCalc(jk_data, eval = "jenkins", species = "SPECIES",
-               dbh = "DBH", crown_cond = "APPEARANCE", output = "biomass", decay = FALSE)
-    ),
+    treeCalc(jk_data, eval = "jenkins", species = "SPECIES",
+             dbh = "DBH", crown_cond = "APPEARANCE", output = "biomass", decay = FALSE),
     regexp = "crown_cond"
   )
 })
 
 test_that("treeCalc warns when rem_bark supplied with eval = 'jenkins'", {
   expect_message(
-    suppressMessages(
-      treeCalc(jk_data, eval = "jenkins", species = "SPECIES",
-               dbh = "DBH", rem_bark = "APPEARANCE", output = "biomass", decay = FALSE)
-    ),
+    treeCalc(jk_data, eval = "jenkins", species = "SPECIES",
+             dbh = "DBH", rem_bark = "APPEARANCE", output = "biomass", decay = FALSE),
     regexp = "rem_bark"
   )
 })
