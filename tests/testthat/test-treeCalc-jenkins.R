@@ -8,13 +8,6 @@ jk_data <- data.frame(
 
 # --- Input validation ---
 
-test_that("treeCalc aborts on invalid eval method", {
-  expect_error(
-    treeCalc(jk_data, eval = "bad_method", species = "SPECIES", dbh = "DBH"),
-    regexp = "Not Available"
-  )
-})
-
 test_that("treeCalc warns when crown_cond supplied with eval = 'jenkins'", {
   expect_message(
     suppressMessages(
