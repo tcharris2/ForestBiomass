@@ -48,10 +48,8 @@ test_that("treeCalc warns on NAs in DBH with jenkins", {
   na_data <- jk_data
   na_data$DBH[1] <- NA
   expect_message(
-    suppressMessages(
-      treeCalc(na_data, eval = "jenkins", species = "SPECIES",
-               dbh = "DBH", output = "biomass", decay = FALSE)
-    ),
+    treeCalc(na_data, eval = "jenkins", species = "SPECIES",
+             dbh = "DBH", output = "biomass", decay = FALSE),
     regexp = "NAs"
   )
 })

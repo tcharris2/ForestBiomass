@@ -18,19 +18,19 @@ test_that("treeCalc aborts on invalid eval method", {
   )
 })
 
-test_that("treeCalc aborts when include_root = TRUE", {
+test_that("treeCalc aborts when crown_cond is not supplied for component-sum pathway", {
   expect_error(
     suppressMessages(
-      treeCalc(tr_data, eval = "ung_eqn_1", species = "SPECIES",
-               dbh = "DBH", crown_cond = "CROWN_COND", include_root = TRUE)
+      treeCalc(tr_data, eval = "ung_1", species = "SPECIES",
+               dbh = "DBH", output = "biomass", decay = FALSE)
     ),
-    regexp = "rootCalc"
+    regexp = "crown_cond"
   )
 })
 
 test_that("treeCalc aborts when height-based equation is used without height", {
   expect_error(
-    treeCalc(tr_data, eval = "ung_eqn_2", species = "SPECIES", dbh = "DBH",
+    treeCalc(tr_data, eval = "ung_2", species = "SPECIES", dbh = "DBH",
              crown_cond = "CROWN_COND", output = "biomass", decay = FALSE),
     regexp = "height"
   )
@@ -39,7 +39,7 @@ test_that("treeCalc aborts when height-based equation is used without height", {
 test_that("treeCalc aborts when decay = TRUE and appearance is not provided", {
   expect_error(
     suppressMessages(
-      treeCalc(tr_data, eval = "ung_eqn_1", species = "SPECIES", dbh = "DBH",
+      treeCalc(tr_data, eval = "ung_1", species = "SPECIES", dbh = "DBH",
                crown_cond = "CROWN_COND", output = "biomass", decay = TRUE)
     ),
     regexp = "appearance"
@@ -49,7 +49,7 @@ test_that("treeCalc aborts when decay = TRUE and appearance is not provided", {
 test_that("treeCalc aborts on invalid output value", {
   expect_error(
     suppressMessages(
-      treeCalc(tr_data, eval = "ung_eqn_1", species = "SPECIES", dbh = "DBH",
+      treeCalc(tr_data, eval = "ung_1", species = "SPECIES", dbh = "DBH",
                crown_cond = "CROWN_COND", output = "invalid", decay = FALSE)
     ),
     regexp = "output"
@@ -61,7 +61,7 @@ test_that("treeCalc aborts when dbh is not numeric", {
   bad$DBH <- as.character(bad$DBH)
   expect_error(
     suppressMessages(
-      treeCalc(bad, eval = "ung_eqn_1", species = "SPECIES",
+      treeCalc(bad, eval = "ung_1", species = "SPECIES",
                dbh = "DBH", crown_cond = "CROWN_COND")
     ),
     regexp = "numeric"
@@ -72,7 +72,7 @@ test_that("treeCalc aborts when dbh is not numeric", {
 
 test_that("treeCalc returns a numeric vector with one value per row", {
   result <- suppressMessages(
-    treeCalc(tr_data, eval = "ung_eqn_1", species = "SPECIES",
+    treeCalc(tr_data, eval = "ung_1", species = "SPECIES",
              dbh = "DBH", crown_cond = "CROWN_COND", output = "biomass", decay = FALSE)
   )
   expect_type(result, "double")
@@ -80,18 +80,18 @@ test_that("treeCalc returns a numeric vector with one value per row", {
 })
 
 test_that("treeCalc result equals sum of all four components", {
-  wood    <- suppressMessages(woodCalc(tr_data, eval = "ung_eqn_1", species = "SPECIES",
+  wood    <- suppressMessages(woodCalc(tr_data, eval = "ung_1", species = "SPECIES",
                                        dbh = "DBH", output = "biomass", decay = FALSE))
-  bark    <- suppressMessages(barkCalc(tr_data, eval = "ung_eqn_1", species = "SPECIES",
+  bark    <- suppressMessages(barkCalc(tr_data, eval = "ung_1", species = "SPECIES",
                                        dbh = "DBH", output = "biomass", decay = FALSE))
-  branch  <- suppressMessages(branchCalc(tr_data, eval = "ung_eqn_1", species = "SPECIES",
+  branch  <- suppressMessages(branchCalc(tr_data, eval = "ung_1", species = "SPECIES",
                                          dbh = "DBH", crown_cond = "CROWN_COND",
                                          output = "biomass", decay = FALSE))
-  foliage <- suppressMessages(foliageCalc(tr_data, eval = "ung_eqn_1", species = "SPECIES",
+  foliage <- suppressMessages(foliageCalc(tr_data, eval = "ung_1", species = "SPECIES",
                                           dbh = "DBH", crown_cond = "CROWN_COND",
                                           output = "biomass", decay = FALSE))
   result <- suppressMessages(
-    treeCalc(tr_data, eval = "ung_eqn_1", species = "SPECIES",
+    treeCalc(tr_data, eval = "ung_1", species = "SPECIES",
              dbh = "DBH", crown_cond = "CROWN_COND", output = "biomass", decay = FALSE)
   )
   expect_equal(result, wood + bark + branch + foliage)
@@ -99,11 +99,11 @@ test_that("treeCalc result equals sum of all four components", {
 
 test_that("treeCalc carbon output is less than biomass output", {
   biomass <- suppressMessages(
-    treeCalc(tr_data, eval = "ung_eqn_1", species = "SPECIES",
+    treeCalc(tr_data, eval = "ung_1", species = "SPECIES",
              dbh = "DBH", crown_cond = "CROWN_COND", output = "biomass", decay = FALSE)
   )
   carbon <- suppressMessages(
-    treeCalc(tr_data, eval = "ung_eqn_1", species = "SPECIES",
+    treeCalc(tr_data, eval = "ung_1", species = "SPECIES",
              dbh = "DBH", crown_cond = "CROWN_COND", output = "carbon", decay = FALSE)
   )
   expect_true(all(carbon < biomass))
@@ -111,12 +111,12 @@ test_that("treeCalc carbon output is less than biomass output", {
 
 test_that("treeCalc decay reduces biomass for decayed trees", {
   no_decay <- suppressMessages(
-    treeCalc(tr_data, eval = "ung_eqn_1", species = "SPECIES",
+    treeCalc(tr_data, eval = "ung_1", species = "SPECIES",
              dbh = "DBH", appearance = "APPEARANCE", crown_cond = "CROWN_COND",
              output = "biomass", decay = FALSE)
   )
   with_decay <- suppressMessages(
-    treeCalc(tr_data, eval = "ung_eqn_1", species = "SPECIES",
+    treeCalc(tr_data, eval = "ung_1", species = "SPECIES",
              dbh = "DBH", appearance = "APPEARANCE", crown_cond = "CROWN_COND",
              output = "biomass", decay = TRUE)
   )
@@ -126,11 +126,11 @@ test_that("treeCalc decay reduces biomass for decayed trees", {
 
 test_that("treeCalc ung_eqn_2 gives different result from ung_eqn_1", {
   eqn1 <- suppressMessages(
-    treeCalc(tr_data, eval = "ung_eqn_1", species = "SPECIES",
+    treeCalc(tr_data, eval = "ung_1", species = "SPECIES",
              dbh = "DBH", crown_cond = "CROWN_COND", output = "biomass", decay = FALSE)
   )
   eqn2 <- suppressMessages(
-    treeCalc(tr_data, eval = "ung_eqn_2", species = "SPECIES",
+    treeCalc(tr_data, eval = "ung_2", species = "SPECIES",
              dbh = "DBH", height = "HEIGHT", crown_cond = "CROWN_COND",
              output = "biomass", decay = FALSE)
   )
