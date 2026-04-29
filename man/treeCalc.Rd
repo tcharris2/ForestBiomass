@@ -6,54 +6,54 @@
 \usage{
 treeCalc(
   data,
-  eval = "ung_eqn_2",
+  eval = "ung_2",
   dbh,
   height = NULL,
   species,
   appearance = NULL,
-  crown_cond,
+  crown_cond = NULL,
   rem_bark = NULL,
   output = "biomass",
-  decay = TRUE,
-  include_root = FALSE
+  decay = TRUE
 )
 }
 \arguments{
 \item{data}{User specified dataframe.}
 
-\item{eval}{Which allometric equation should be used? Default is "ung_eqn_2". Options are:
-"ung_eqn_1", "ung_eqn_2", "lambert_eqn_1", "lambert_eqn_2".}
+\item{eval}{Which equation set to use. Default is "ung_2". Options are:
+"ung_1", "ung_2", "lambert_1", "lambert_2" (component-sum pathway), or
+"jenkins" (Jenkins et al., 2003 direct total biomass).}
 
 \item{dbh}{Column within data where Diameter at Breast Height (dbh) is specified.}
 
-\item{height}{Optional. Required for lambert_eqn_2 or ung_eqn_2.}
+\item{height}{Optional. Required for "lambert_2" or "ung_2".}
 
 \item{species}{Column within data where species is specified. NFI codes for species.}
 
 \item{appearance}{Optional. Required when decay = TRUE.}
 
-\item{crown_cond}{Column within data where crown condition is specified.}
+\item{crown_cond}{Column within data where crown condition is specified. Required
+for "ung_1", "ung_2", "lambert_1", "lambert_2". Not used with "jenkins".}
 
-\item{rem_bark}{Optional. Column within data where remaining bark percentage (0-100) is specified.}
+\item{rem_bark}{Optional. Column within data where remaining bark percentage (0-100)
+is specified. Not used with "jenkins".}
 
 \item{output}{Either "biomass" (default, kg) or "carbon" (Mg/ha).}
 
 \item{decay}{Logical with default = TRUE. Should the decay class reduction factor be applied?}
-
-\item{include_root}{Logical with default = FALSE. Should root biomass be included?
-rootCalc() is not yet implemented; setting this to TRUE will raise an error.}
 }
 \value{
 A vector.
 }
 \description{
-Calculates total above-ground tree biomass or carbon by summing
-wood, branch, foliage, and bark components. Calculations are based on the
-allometric equations provided in Ung et al., 2008 or Lambert et al., 2005.
+Calculates total above-ground tree biomass or carbon. Two methodologies
+are available: (1) summing wood, branch, foliage, and bark components using allometric
+equations from Ung et al., 2008 or Lambert et al., 2005; or (2) direct total
+above-ground biomass via Jenkins et al., 2003 national-scale equations.
 A species-specific decay class reduction factor (Harmon et al., 2011) can be applied.
 }
 \examples{
-treeCalc(data = trees_data, eval = "ung_eqn_2", species = "LGTREE_NFI",
+treeCalc(data = trees_data, eval = "ung_2", species = "LGTREE_NFI",
 dbh = "DBH", height = "HEIGHT", appearance = "APPEARANCE",
 crown_cond = "CROWN_COND", output = "biomass", decay = TRUE)
 }
