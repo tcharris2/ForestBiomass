@@ -124,7 +124,7 @@ test_that("treeCalc decay reduces biomass for decayed trees", {
   expect_equal(with_decay[1], no_decay[1])  # APPEARANCE=1, no reduction
 })
 
-test_that("treeCalc ung_eqn_2 gives different result from ung_eqn_1", {
+test_that("treeCalc ung_2 gives different result from ung_1", {
   eqn1 <- suppressMessages(
     treeCalc(tr_data, eval = "ung_1", species = "SPECIES",
              dbh = "DBH", crown_cond = "CROWN_COND", output = "biomass", decay = FALSE)
