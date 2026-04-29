@@ -1,18 +1,19 @@
-#' Internal Function: Biomass/Carbon output selection
+#' Internal Function: Biomass/Carbon output modifier
 #'
-#' @param output "biomass" or "carbon" 
+#' @param output One of "biomass", "biomass Mg/ha", "carbon", or "carbon Mg/ha".
+#' @param plot_radius Plot radius in metres used to compute the per-hectare expansion factor. Default 11.28 m.
 #'
-#' @returns A parameter to modify function output to return either biomass (Kg) or carbon (Mg/ha)
+#' @returns A numeric multiplier applied to raw allometric output (kg) to reach the requested units.
 #' @keywords internal
 #'
 #' @examples carbonMod("biomass")
 
-
-
-carbonMod <- function(output){
-  
-  carbon_mod_value <- ForestBiomass::carbon_data[["CARBON_MOD"]][ForestBiomass::carbon_data[["CARBON_METHOD"]] == output]
-  
-  return(carbon_mod_value)
-  
+carbonMod <- function(output, plot_radius = 11.28) {
+  ha_mod <- 10000 / (pi * plot_radius^2) / 1000
+  switch(output,
+    "biomass"       = 1,
+    "biomass Mg/ha" = ha_mod,
+    "carbon"        = 0.5,
+    "carbon Mg/ha"  = 0.5 * ha_mod
+  )
 }

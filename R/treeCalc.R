@@ -18,8 +18,9 @@
 #' for "ung_1", "ung_2", "lambert_1", "lambert_2". Not used with "jenkins".
 #' @param rem_bark Optional. Column within data where remaining bark percentage (0-100)
 #' is specified. Not used with "jenkins".
-#' @param output Either "biomass" (default, kg) or "carbon" (Mg/ha).
+#' @param output One of "biomass" (kg, default), "biomass Mg/ha", "carbon" (kg), or "carbon Mg/ha".
 #' @param decay Logical with default = TRUE. Should the decay class reduction factor be applied?
+#' @param plot_radius Plot radius in metres used to compute the per-hectare expansion factor. Default 11.28 m.
 #'
 #' @returns A vector.
 #' @export
@@ -34,10 +35,12 @@
 treeCalc <- function(data, eval = "ung_2",
                      dbh, height = NULL, species, appearance = NULL,
                      crown_cond = NULL, rem_bark = NULL,
-                     output = "biomass", decay = TRUE) {
+                     output = "biomass", decay = TRUE, plot_radius = 11.28) {
 
   if (!eval %in% c("ung_1", "ung_2", "lambert_1", "lambert_2", "jenkins"))
     rlang::abort("Specified Method Not Available")
+
+  valid_outputs <- c("biomass", "biomass Mg/ha", "carbon", "carbon Mg/ha")
 
   if (eval == "jenkins") {
     if (!is.null(crown_cond))
@@ -54,17 +57,19 @@ treeCalc <- function(data, eval = "ung_2",
     if (any(is.na(data[[dbh]])))
       message(paste("Warning: NAs detected in", dbh))
 
-    if (!output %in% c("biomass", "carbon"))
-      rlang::abort("'output' must be \"biomass\" or \"carbon\".")
+    if (!output %in% valid_outputs)
+      rlang::abort("'output' must be \"biomass\", \"biomass Mg/ha\", \"carbon\", or \"carbon Mg/ha\".")
 
     if (decay && is.null(appearance))
       stop("'appearance' is required when decay = TRUE.", call. = FALSE)
 
-    message(paste("Output:", output, if (output == "biomass") "(kg)" else "(Mg/ha)"))
+    units <- if (grepl("Mg/ha", output)) "(Mg/ha)" else "(kg)"
+    message(paste("Output:", output, units))
     if (decay) message("Species specified decay reduction factor applied (Harmon et al., 2011)")
 
     return(jenkinsCalculator(data, dbh = dbh, species = species,
-                              appearance = appearance, output = output, decay = decay))
+                              appearance = appearance, output = output, decay = decay,
+                              plot_radius = plot_radius))
   }
 
   validateSpecies(data[[species]], eval)
@@ -82,8 +87,8 @@ treeCalc <- function(data, eval = "ung_2",
       message(paste("Warning: NAs detected in", height))
   }
 
-  if (!output %in% c("biomass", "carbon"))
-    rlang::abort("'output' must be \"biomass\" or \"carbon\".")
+  if (!output %in% valid_outputs)
+    rlang::abort("'output' must be \"biomass\", \"biomass Mg/ha\", \"carbon\", or \"carbon Mg/ha\".")
 
   if (is.null(crown_cond))
     stop("'crown_cond' is required when eval is not 'jenkins'.", call. = FALSE)
@@ -91,21 +96,25 @@ treeCalc <- function(data, eval = "ung_2",
   if (decay && is.null(appearance))
     stop("'appearance' is required when decay = TRUE.", call. = FALSE)
 
-  message(paste("Output:", output, if (output == "biomass") "(kg)" else "(Mg/ha)"))
+  units <- if (grepl("Mg/ha", output)) "(Mg/ha)" else "(kg)"
+  message(paste("Output:", output, units))
   if (decay) message("Species specified decay reduction factor applied (Harmon et al., 2011)")
 
   wood    <- suppressMessages(woodCalc(data, eval = eval, dbh = dbh, height = height,
                                        species = species, appearance = appearance,
-                                       output = output, decay = decay))
+                                       output = output, decay = decay, plot_radius = plot_radius))
   bark    <- suppressMessages(barkCalc(data, eval = eval, dbh = dbh, height = height,
                                        species = species, appearance = appearance,
-                                       rem_bark = rem_bark, output = output, decay = decay))
+                                       rem_bark = rem_bark, output = output, decay = decay,
+                                       plot_radius = plot_radius))
   branch  <- suppressMessages(branchCalc(data, eval = eval, dbh = dbh, height = height,
                                          species = species, appearance = appearance,
-                                         crown_cond = crown_cond, output = output, decay = decay))
+                                         crown_cond = crown_cond, output = output, decay = decay,
+                                         plot_radius = plot_radius))
   foliage <- suppressMessages(foliageCalc(data, eval = eval, dbh = dbh, height = height,
                                           species = species, appearance = appearance,
-                                          crown_cond = crown_cond, output = output, decay = decay))
+                                          crown_cond = crown_cond, output = output, decay = decay,
+                                          plot_radius = plot_radius))
 
   wood + bark + branch + foliage
 }

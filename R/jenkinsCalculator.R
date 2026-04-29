@@ -4,16 +4,17 @@
 #' @param dbh Column within data where DBH is specified.
 #' @param species Column within data where species is specified. NFI codes.
 #' @param appearance Column within data where tree appearance is specified.
-#' @param output Either "biomass" or "carbon".
+#' @param output One of "biomass", "biomass Mg/ha", "carbon", or "carbon Mg/ha".
 #' @param decay Logical. Should the decay class reduction factor be applied?
+#' @param plot_radius Plot radius in metres for per-hectare expansion. Default 11.28 m.
 #'
 #' @returns A vector
 #' @keywords internal
 #' @examples NA
 
-jenkinsCalculator <- function(data, dbh, species, appearance = NULL, output, decay) {
+jenkinsCalculator <- function(data, dbh, species, appearance = NULL, output, decay, plot_radius = 11.28) {
 
-  carbon_mod <- carbonMod(output)
+  carbon_mod <- carbonMod(output, plot_radius)
   result <- numeric(nrow(data))
 
   for (i in seq_len(nrow(data))) {
