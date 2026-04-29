@@ -82,11 +82,11 @@ treeCalc <- function(data, eval = "ung_2",
   if (!output %in% c("biomass", "carbon"))
     rlang::abort("'output' must be \"biomass\" or \"carbon\".")
 
-  if (decay && is.null(appearance))
-    stop("'appearance' is required when decay = TRUE.", call. = FALSE)
-
   if (is.null(crown_cond))
     stop("'crown_cond' is required when eval is not 'jenkins'.", call. = FALSE)
+
+  if (decay && is.null(appearance))
+    stop("'appearance' is required when decay = TRUE.", call. = FALSE)
 
   message(paste("Output:", output, if (output == "biomass") "(kg)" else "(Mg/ha)"))
   if (decay) message("Species specified decay reduction factor applied (Harmon et al., 2011)")
