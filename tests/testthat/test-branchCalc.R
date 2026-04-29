@@ -82,7 +82,7 @@ test_that("branchCalc carbon output is less than biomass output", {
   expect_true(all(carbon < biomass))
 })
 
-test_that("branchCalc returns correct known value for PSEU_MEN with ung_eqn_1", {
+test_that("branchCalc returns correct known value for PSEU_MEN with ung_1", {
   single <- data.frame(SPECIES = "PSEU_MEN", DBH = 10.0, HEIGHT = 10.0,
                        APPEARANCE = 1, CROWN_COND = 1)
   result <- suppressMessages(
