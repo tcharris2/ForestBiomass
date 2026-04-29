@@ -6,7 +6,7 @@
 \usage{
 foliageCalc(
   data,
-  eval = "ung_eqn_2",
+  eval = "ung_2",
   dbh,
   height = NULL,
   species,
@@ -19,12 +19,12 @@ foliageCalc(
 \arguments{
 \item{data}{User specified dataframe.}
 
-\item{eval}{Which allomentic equation should be used? Default is "ung_eqn_2". Options are:
-"ung_eqn_1", "ung_eqn_2", "lambert_eqn_1", "lambert_eqn_2".}
+\item{eval}{Which allomentic equation should be used? Default is "ung_2". Options are:
+"ung_1", "ung_2", "lambert_1", "lambert_2".}
 
 \item{dbh}{Column within data where Diameter at Breast Height (dbh) is specified.}
 
-\item{height}{Optional. Required for lambert_eqn_2 or ung_eqn_2.}
+\item{height}{Optional. Required for lambert_2 or ung_2.}
 
 \item{species}{Column within data where species is specified. NFI codes for species.}
 
@@ -45,7 +45,7 @@ Calculations are done base on the allometric equations provided in Ung et al., 2
 A species specific decay class reduction factor can be applied (Harmon et al., 2011) if desired.
 }
 \examples{
-foliageCalc(data = trees_data, eval = "ung_eqn_2", species = "LGTREE_NFI",
+foliageCalc(data = trees_data, eval = "ung_2", species = "LGTREE_NFI",
 dbh = "DBH", height = "HEIGHT", appearance = "APPEARANCE",
 crown_cond = "CROWN_COND", output = "biomass", decay = TRUE)
 }
