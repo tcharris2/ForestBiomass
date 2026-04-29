@@ -10,7 +10,7 @@
 
 carbonMod <- function(output, plot_radius = 11.28) {
   con_fact <- c("3.99" = 200, "5.64" = 100, "7.98" = 50, "11.28" = 25)
-  ha_mod <- con_fact[as.character(plot_radius)] / 1000
+  ha_mod <- unname(con_fact[as.character(plot_radius)]) / 1000
   switch(output,
     "biomass"       = 1,
     "biomass Mg/ha" = ha_mod,
