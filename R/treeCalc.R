@@ -20,7 +20,8 @@
 #' is specified. Not used with "jenkins".
 #' @param output One of "biomass" (kg, default), "biomass Mg/ha", "carbon" (kg), or "carbon Mg/ha".
 #' @param decay Logical with default = TRUE. Should the decay class reduction factor be applied?
-#' @param plot_radius Plot radius in metres. Default 11.28 m.
+#' @param plot_radius Plot radius in metres. Required when output is "biomass Mg/ha" or "carbon Mg/ha".
+#' Must be one of 3.99, 5.64, 7.98, or 11.28. Default 11.28 m.
 #'
 #' @returns A vector.
 #' @export
@@ -60,6 +61,9 @@ treeCalc <- function(data, eval = "ung_2",
     if (!output %in% valid_outputs)
       rlang::abort("'output' must be \"biomass\", \"biomass Mg/ha\", \"carbon\", or \"carbon Mg/ha\".")
 
+    if (grepl("Mg/ha", output) && !plot_radius %in% c(3.99, 5.64, 7.98, 11.28))
+      stop("'plot_radius' must be one of 3.99, 5.64, 7.98, or 11.28.", call. = FALSE)
+
     if (decay && is.null(appearance))
       stop("'appearance' is required when decay = TRUE.", call. = FALSE)
 
@@ -89,6 +93,9 @@ treeCalc <- function(data, eval = "ung_2",
 
   if (!output %in% valid_outputs)
     rlang::abort("'output' must be \"biomass\", \"biomass Mg/ha\", \"carbon\", or \"carbon Mg/ha\".")
+
+  if (grepl("Mg/ha", output) && !plot_radius %in% c(3.99, 5.64, 7.98, 11.28))
+    stop("'plot_radius' must be one of 3.99, 5.64, 7.98, or 11.28.", call. = FALSE)
 
   if (is.null(crown_cond))
     stop("'crown_cond' is required when eval is not 'jenkins'.", call. = FALSE)
