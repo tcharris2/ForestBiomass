@@ -14,7 +14,7 @@
 #' @param crown_cond Column within data where crown condition is specified.
 #' @param output One of "biomass" (kg, default), "biomass Mg/ha", "carbon" (kg), or "carbon Mg/ha".
 #' @param decay Logical with default = TRUE. Should the decay class reduction factor be applied?
-#' @param plot_radius Plot radius in metres used to compute the per-hectare expansion factor. Default 11.28 m.
+#' @param plot_radius Plot radius in metres. Default 11.28 m.
 #'
 #' @returns A vector.
 #' @export
