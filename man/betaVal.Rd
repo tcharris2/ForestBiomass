@@ -4,7 +4,7 @@
 \alias{betaVal}
 \title{Internal Function: Beta Values}
 \usage{
-betaVal(method, species = species_spec, component = component_spec)
+betaVal(method, species, component)
 }
 \arguments{
 \item{method}{Dataframe within the package to retrive beta values from.

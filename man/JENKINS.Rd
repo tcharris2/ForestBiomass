@@ -24,4 +24,8 @@ JENKINS
 \description{
 Data: Jenkins et al. (2003) total above-ground biomass equation coefficients
 }
+\details{
+Used in the equation \code{bm = exp(BETA_0 + BETA_1 * log(DBH))}, where DBH is
+in cm and bm is total above-ground biomass in kg.
+}
 \keyword{datasets}
