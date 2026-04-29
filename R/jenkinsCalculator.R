@@ -9,6 +9,7 @@
 #'
 #' @returns A vector
 #' @keywords internal
+#' @examples NA
 
 jenkinsCalculator <- function(data, dbh, species, appearance = NULL, output, decay) {
 

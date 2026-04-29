@@ -59,7 +59,8 @@ test_that("treeCalc aborts on invalid output with jenkins", {
     suppressMessages(
       treeCalc(jk_data, eval = "jenkins", species = "SPECIES",
                dbh = "DBH", output = "bad_output", decay = FALSE)
-    )
+    ),
+    regexp = "output"
   )
 })
 
@@ -68,7 +69,8 @@ test_that("treeCalc aborts when decay = TRUE and appearance not supplied with je
     suppressMessages(
       treeCalc(jk_data, eval = "jenkins", species = "SPECIES",
                dbh = "DBH", output = "biomass", decay = TRUE)
-    )
+    ),
+    regexp = "appearance"
   )
 })
 
