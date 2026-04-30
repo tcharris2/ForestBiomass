@@ -17,6 +17,7 @@ jenkinsRatioCalculator <- function(data, dbh, species) {
   for (i in seq_len(n)) {
     wood_type <- ForestBiomass::SPECIES_CLASS$WOOD_TYPE[
       ForestBiomass::SPECIES_CLASS$SPECIES == data[[species]][i]]
+    stopifnot(length(wood_type) == 1L)
 
     sub <- ForestBiomass::JENKINS_RATIO[ForestBiomass::JENKINS_RATIO$WOOD_TYPE == wood_type, ]
 
