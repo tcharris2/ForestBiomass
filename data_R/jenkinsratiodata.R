@@ -6,7 +6,7 @@
 JENKINS_RATIO <- data.frame(
   WOOD_TYPE = rep(c("hardwood", "softwood"), each = 4),
   COMPONENT = rep(c("foliage", "coarse_roots", "stem_bark", "stem_wood"), 2),
-  BETA_0    = c(-4.0813, -1.6911, -2.01129, -0.3065,
+  BETA_0    = c(-4.0813, -1.6911, -2.0129, -0.3065,
                -2.9584, -1.5619, -2.0980,  -0.3737),
   BETA_1    = c( 5.8816,  0.8160, -1.6805,  -5.4240,
                 4.4766,  0.6614, -1.1432,  -1.8055),
