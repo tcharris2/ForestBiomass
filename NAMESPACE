@@ -3,5 +3,7 @@
 export(barkCalc)
 export(branchCalc)
 export(foliageCalc)
+export(jenkinsRatio)
+export(rootCalc)
 export(treeCalc)
 export(woodCalc)
