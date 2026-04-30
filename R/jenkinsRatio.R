@@ -3,7 +3,7 @@
 #' @description Calculates the ratio of each biomass component to total above-ground biomass
 #' using Jenkins et al. (2003) equations. Components are foliage, coarse roots, stem bark,
 #' and stem wood. Species are classified as softwood or hardwood using \code{SPECIES_CLASS}.
-#' Formula: \code{ratio = exp(β₀ + β₁ / DBH)}.
+#' Formula: \code{ratio = exp(b0 + b1 / DBH)}.
 #'
 #' @param data User specified dataframe.
 #' @param dbh Column within data where Diameter at Breast Height (DBH) is specified (cm).
