@@ -2,7 +2,8 @@
 #'
 #' @param data User specified dataframe.
 #' @param method Dataframe within the package to retrieve beta values from.
-#' @param output Either "biomass" or "carbon".
+#' @param output One of "biomass", "biomass Mg/ha", "carbon", or "carbon Mg/ha".
+#' @param plot_radius Plot radius in metres for per-hectare expansion. Default 11.28 m.
 #' @param dbh Column within data where DBH is specified.
 #' @param height Column within data where Height is specified.
 #' @param species Column within data where species is specified.
@@ -17,9 +18,9 @@
 #' @examples NA
 
 foliageCalculator <- function(data, method, output, dbh, height = NULL, species,
-                              crown_cond, func, appearance = NULL, decay = TRUE) {
+                              crown_cond, func, appearance = NULL, decay = TRUE, plot_radius = 11.28) {
 
-  carbon_mod <- carbonMod(output)
+  carbon_mod <- carbonMod(output, plot_radius)
   foliage_biomass <- c()
 
   for (i in seq_len(nrow(data))) {
