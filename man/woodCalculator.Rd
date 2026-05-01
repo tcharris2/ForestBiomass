@@ -13,7 +13,8 @@ woodCalculator(
   species,
   func,
   appearance = NULL,
-  decay = TRUE
+  decay = TRUE,
+  plot_radius = 11.28
 )
 }
 \arguments{
@@ -22,7 +23,7 @@ woodCalculator(
 \item{method}{Dataframe within the package to retrive beta values from.
 Options are "LAMBERT_1", "LAMBERT_2", "UNG_1", "UNG_2".}
 
-\item{output}{Either "biomass" or "carbon". Biomass gives values in Kg. Carbon gives values in Mg/ha.}
+\item{output}{One of "biomass", "biomass Mg/ha", "carbon", or "carbon Mg/ha".}
 
 \item{dbh}{Column within data where Diameter at Breast Height (dbh) is specified.}
 
@@ -35,6 +36,8 @@ Options are "LAMBERT_1", "LAMBERT_2", "UNG_1", "UNG_2".}
 \item{appearance}{Column within data where tree appearance is specified.}
 
 \item{decay}{Logical with default = TRUE. Should the decay class reduction factor be applied?}
+
+\item{plot_radius}{Plot radius in metres for per-hectare expansion. Default 11.28 m.}
 }
 \value{
 A vector
