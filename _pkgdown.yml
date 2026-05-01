@@ -1,0 +1,49 @@
+url: https://tcharris2.github.io/ForestBiomass/
+
+template:
+  bootstrap: 5
+
+home:
+  title: ForestBiomass
+  description: >
+    Calculate forest biomass and carbon for individual trees using hierarchical
+    allometric equations (Ung et al. 2008, Lambert et al. 2005, Jenkins et al. 2003).
+
+navbar:
+  structure:
+    left: [intro, articles, reference]
+    right: [github]
+
+articles:
+  - title: Vignettes
+    navbar: ~
+    contents:
+      - getting-started
+      - component-biomass
+
+reference:
+  - title: Biomass Functions
+    desc: User-facing functions for estimating tree biomass and carbon.
+    contents:
+      - treeCalc
+      - woodCalc
+      - barkCalc
+      - branchCalc
+      - foliageCalc
+      - rootCalc
+      - jenkinsRatio
+
+  - title: Datasets
+    desc: Allometric equation coefficients and species lookup tables.
+    contents:
+      - sample_trees
+      - UNG_1
+      - UNG_2
+      - LAMBERT_1
+      - LAMBERT_2
+      - JENKINS
+      - JENKINS_GROUPS
+      - JENKINS_RATIO
+      - SPECIES_CLASS
+      - LI_2003
+      - HARMON_2011
