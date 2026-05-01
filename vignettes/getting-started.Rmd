@@ -61,6 +61,8 @@ agb
 ```
 
 Each value is the total above-ground biomass for one tree in kilograms.
+`decay = TRUE` applies a species-specific reduction for standing dead or downed
+wood (Harmon et al., 2011). For live-tree inventories, use `decay = FALSE`.
 
 ## Output options
 
@@ -86,6 +88,14 @@ suppressMessages(
   treeCalc(sample_trees, eval = "ung_2", species = "SPECIES",
            dbh = "DBH", height = "HEIGHT", appearance = "APPEARANCE",
            crown_cond = "CROWN_COND", output = "biomass Mg/ha",
+           decay = FALSE, plot_radius = 11.28)
+)
+
+# Stand-level carbon (Mg/ha)
+suppressMessages(
+  treeCalc(sample_trees, eval = "ung_2", species = "SPECIES",
+           dbh = "DBH", height = "HEIGHT", appearance = "APPEARANCE",
+           crown_cond = "CROWN_COND", output = "carbon Mg/ha",
            decay = FALSE, plot_radius = 11.28)
 )
 ```
