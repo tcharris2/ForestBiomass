@@ -13,7 +13,8 @@ branchCalc(
   appearance = NULL,
   crown_cond,
   output = "biomass",
-  decay = TRUE
+  decay = TRUE,
+  plot_radius = 11.28
 )
 }
 \arguments{
@@ -32,9 +33,12 @@ branchCalc(
 
 \item{crown_cond}{Column within data where crown condition is specified.}
 
-\item{output}{Either "biomass" (default, kg) or "carbon" (Mg/ha).}
+\item{output}{One of "biomass" (kg, default), "biomass Mg/ha", "carbon" (kg), or "carbon Mg/ha".}
 
 \item{decay}{Logical with default = TRUE. Should the decay class reduction factor be applied?}
+
+\item{plot_radius}{Plot radius in metres. Required when output is "biomass Mg/ha" or "carbon Mg/ha".
+Must be one of 3.99, 5.64, 7.98, or 11.28. Default 11.28 m.}
 }
 \value{
 A vector.

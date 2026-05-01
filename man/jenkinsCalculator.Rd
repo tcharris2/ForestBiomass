@@ -4,7 +4,15 @@
 \alias{jenkinsCalculator}
 \title{Internal Function: Jenkins Calculator}
 \usage{
-jenkinsCalculator(data, dbh, species, appearance = NULL, output, decay)
+jenkinsCalculator(
+  data,
+  dbh,
+  species,
+  appearance = NULL,
+  output,
+  decay,
+  plot_radius = 11.28
+)
 }
 \arguments{
 \item{data}{User specified dataframe.}
@@ -15,14 +23,19 @@ jenkinsCalculator(data, dbh, species, appearance = NULL, output, decay)
 
 \item{appearance}{Column within data where tree appearance is specified.}
 
-\item{output}{Either "biomass" or "carbon".}
+\item{output}{One of "biomass", "biomass Mg/ha", "carbon", or "carbon Mg/ha".}
 
 \item{decay}{Logical. Should the decay class reduction factor be applied?}
+
+\item{plot_radius}{Plot radius in metres for per-hectare expansion. Default 11.28 m.}
 }
 \value{
 A vector
 }
 \description{
 Internal Function: Jenkins Calculator
+}
+\examples{
+NA
 }
 \keyword{internal}

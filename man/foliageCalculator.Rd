@@ -14,7 +14,8 @@ foliageCalculator(
   crown_cond,
   func,
   appearance = NULL,
-  decay = TRUE
+  decay = TRUE,
+  plot_radius = 11.28
 )
 }
 \arguments{
@@ -22,7 +23,7 @@ foliageCalculator(
 
 \item{method}{Dataframe within the package to retrieve beta values from.}
 
-\item{output}{Either "biomass" or "carbon".}
+\item{output}{One of "biomass", "biomass Mg/ha", "carbon", or "carbon Mg/ha".}
 
 \item{dbh}{Column within data where DBH is specified.}
 
@@ -37,6 +38,8 @@ foliageCalculator(
 \item{appearance}{Column within data where tree appearance is specified.}
 
 \item{decay}{Logical. Should the decay class reduction factor be applied?}
+
+\item{plot_radius}{Plot radius in metres for per-hectare expansion. Default 11.28 m.}
 }
 \value{
 A vector
