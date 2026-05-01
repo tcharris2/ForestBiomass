@@ -9,6 +9,7 @@ Description: Calculates forest biomass and carbon for individual trees using
     Total above-ground biomass can also be estimated directly via Jenkins et al. (2003)
     national-scale equations. Decay class reduction factors from Harmon et al. (2011)
     are optionally applied.
+URL: https://tcharris2.github.io/ForestBiomass/
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
