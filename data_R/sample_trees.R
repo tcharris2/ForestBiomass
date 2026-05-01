@@ -1,3 +1,4 @@
+# Simulated BC tree measurements used as a shared fixture in package vignettes.
 sample_trees <- data.frame(
   SPECIES    = c("PSEU_MEN", "PINU_CON", "TSUG_HET", "POPU_TRE", "PICE_MAR", "PICE_GLA"),
   DBH        = c(32.4, 18.7, 14.2, 27.6,  9.8, 41.3),
