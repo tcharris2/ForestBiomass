@@ -1,0 +1,152 @@
+---
+title: "Component Biomass"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Component Biomass}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+```{r setup}
+library(ForestBiomass)
+```
+
+`treeCalc()` returns total above-ground biomass by summing four components:
+wood (stem), bark, branches, and foliage. Each component can also be computed
+independently. This is useful when you need allocation patterns, want to
+exclude a component for a particular tree type (e.g., no foliage on a snag),
+or need per-component carbon accounting.
+
+## Individual component functions
+
+All four functions share the same argument structure as `treeCalc()`.
+
+```{r}
+wood <- woodCalc(
+  data    = sample_trees, eval = "ung_2",
+  species = "SPECIES", dbh = "DBH", height = "HEIGHT",
+  output  = "biomass", decay = FALSE
+)
+
+bark <- barkCalc(
+  data    = sample_trees, eval = "ung_2",
+  species = "SPECIES", dbh = "DBH", height = "HEIGHT",
+  output  = "biomass", decay = FALSE
+)
+
+branch <- branchCalc(
+  data       = sample_trees, eval = "ung_2",
+  species    = "SPECIES",    dbh = "DBH", height = "HEIGHT",
+  crown_cond = "CROWN_COND", output = "biomass", decay = FALSE
+)
+
+foliage <- foliageCalc(
+  data       = sample_trees, eval = "ung_2",
+  species    = "SPECIES",    dbh = "DBH", height = "HEIGHT",
+  crown_cond = "CROWN_COND", output = "biomass", decay = FALSE
+)
+```
+
+Summing the four components reproduces the `treeCalc()` result exactly:
+
+```{r}
+agb <- suppressMessages(
+  treeCalc(sample_trees, eval = "ung_2", species = "SPECIES",
+           dbh = "DBH", height = "HEIGHT", crown_cond = "CROWN_COND",
+           output = "biomass", decay = FALSE)
+)
+all.equal(wood + bark + branch + foliage, agb)
+```
+
+Component proportions vary by species and tree size:
+
+```{r}
+total <- wood + bark + branch + foliage
+data.frame(
+  species = sample_trees$SPECIES,
+  wood_pct    = round(wood    / total * 100, 1),
+  bark_pct    = round(bark    / total * 100, 1),
+  branch_pct  = round(branch  / total * 100, 1),
+  foliage_pct = round(foliage / total * 100, 1)
+)
+```
+
+## Adjusting for partial bark loss
+
+`barkCalc()` accepts an optional `rem_bark` column (percentage remaining,
+0-100). This scales bark biomass proportionally and is useful for trees with
+beetle kill, fire scorch, or logging damage.
+
+```{r}
+sample_trees$REM_BARK <- c(100, 100, 80, 60, 20, 100)
+
+full_bark <- suppressMessages(
+  barkCalc(sample_trees, eval = "ung_2", species = "SPECIES",
+           dbh = "DBH", height = "HEIGHT", output = "biomass", decay = FALSE)
+)
+partial_bark <- suppressMessages(
+  barkCalc(sample_trees, eval = "ung_2", species = "SPECIES",
+           dbh = "DBH", height = "HEIGHT", rem_bark = "REM_BARK",
+           output = "biomass", decay = FALSE)
+)
+
+data.frame(
+  species  = sample_trees$SPECIES,
+  rem_bark = sample_trees$REM_BARK,
+  full_kg  = round(full_bark,    2),
+  adj_kg   = round(partial_bark, 2)
+)
+```
+
+## Jenkins component ratios
+
+`jenkinsRatio()` decomposes total above-ground biomass into four component
+proportions using Jenkins et al. (2003) equations. It requires only DBH and
+species — no height or crown condition. Species are classified as softwood or
+hardwood internally.
+
+```{r}
+ratios <- jenkinsRatio(sample_trees, dbh = "DBH", species = "SPECIES")
+str(ratios)
+```
+
+Each element is a vector of ratios (one per tree). The four components sum to
+approximately 1:
+
+```{r}
+wood_type <- ForestBiomass::SPECIES_CLASS$WOOD_TYPE[
+  match(sample_trees$SPECIES, ForestBiomass::SPECIES_CLASS$SPECIES)
+]
+
+data.frame(
+  species     = sample_trees$SPECIES,
+  wood_type   = wood_type,
+  foliage     = round(ratios$foliage,      3),
+  coarse_root = round(ratios$coarse_roots, 3),
+  stem_bark   = round(ratios$stem_bark,    3),
+  stem_wood   = round(ratios$stem_wood,    3),
+  check_sum   = round(ratios$foliage + ratios$coarse_roots +
+                        ratios$stem_bark + ratios$stem_wood, 3)
+)
+```
+
+Multiply the ratios by a Jenkins total biomass estimate to get component values:
+
+```{r}
+jenkins_total <- suppressMessages(
+  treeCalc(sample_trees, eval = "jenkins", species = "SPECIES",
+           dbh = "DBH", output = "biomass", decay = FALSE)
+)
+
+data.frame(
+  species     = sample_trees$SPECIES,
+  stem_wood   = round(ratios$stem_wood    * jenkins_total, 1),
+  stem_bark   = round(ratios$stem_bark    * jenkins_total, 1),
+  foliage     = round(ratios$foliage      * jenkins_total, 1),
+  coarse_root = round(ratios$coarse_roots * jenkins_total, 1)
+)
+```
