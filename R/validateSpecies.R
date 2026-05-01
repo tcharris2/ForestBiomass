@@ -4,6 +4,7 @@
 #' @param eval The allometric equation method string.
 #'
 #' @returns NULL invisibly; aborts if species are invalid.
+#' @keywords internal
 
 validateSpecies <- function(species_input, eval) {
   species_all <- if (startsWith(eval, "lambert")) unique(ForestBiomass::LAMBERT_1[["SPECIES"]])
