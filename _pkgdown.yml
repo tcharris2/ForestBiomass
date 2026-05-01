@@ -1,5 +1,7 @@
 url: https://tcharris2.github.io/ForestBiomass/
 
+destination: site
+
 template:
   bootstrap: 5
 
