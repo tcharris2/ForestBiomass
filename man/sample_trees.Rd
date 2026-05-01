@@ -16,7 +16,7 @@ higher codes indicate increasing decay.}
 }
 }
 \source{
-Simulated data.
+Simulated data; see \code{data_R/sample_trees.R} to regenerate.
 }
 \usage{
 sample_trees

@@ -15,5 +15,5 @@
 #'     higher codes indicate increasing decay.}
 #'   \item{CROWN_COND}{Crown condition code (1-5). 1 = full crown; 5 = no crown.}
 #' }
-#' @source Simulated data.
+#' @source Simulated data; see `data_R/sample_trees.R` to regenerate.
 "sample_trees"
