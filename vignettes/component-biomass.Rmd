@@ -32,23 +32,23 @@ wood <- woodCalc(
   output  = "biomass", decay = FALSE
 )
 
-bark <- barkCalc(
+bark <- suppressMessages(barkCalc(
   data    = sample_trees, eval = "ung_2",
   species = "SPECIES", dbh = "DBH", height = "HEIGHT",
   output  = "biomass", decay = FALSE
-)
+))
 
-branch <- branchCalc(
+branch <- suppressMessages(branchCalc(
   data       = sample_trees, eval = "ung_2",
   species    = "SPECIES",    dbh = "DBH", height = "HEIGHT",
   crown_cond = "CROWN_COND", output = "biomass", decay = FALSE
-)
+))
 
-foliage <- foliageCalc(
+foliage <- suppressMessages(foliageCalc(
   data       = sample_trees, eval = "ung_2",
   species    = "SPECIES",    dbh = "DBH", height = "HEIGHT",
   crown_cond = "CROWN_COND", output = "biomass", decay = FALSE
-)
+))
 ```
 
 Summing the four components reproduces the `treeCalc()` result exactly:
@@ -114,12 +114,13 @@ ratios <- jenkinsRatio(sample_trees, dbh = "DBH", species = "SPECIES")
 str(ratios)
 ```
 
-Each element is a vector of ratios (one per tree). The four components sum to
-approximately 1:
+Each element is a vector of ratios (one per tree). The Jenkins equations are
+fit independently per component, so the four components sum to approximately 1
+rather than exactly 1:
 
 ```{r}
-wood_type <- ForestBiomass::SPECIES_CLASS$WOOD_TYPE[
-  match(sample_trees$SPECIES, ForestBiomass::SPECIES_CLASS$SPECIES)
+wood_type <- SPECIES_CLASS$WOOD_TYPE[
+  match(sample_trees$SPECIES, SPECIES_CLASS$SPECIES)
 ]
 
 data.frame(
@@ -134,7 +135,9 @@ data.frame(
 )
 ```
 
-Multiply the ratios by a Jenkins total biomass estimate to get component values:
+Multiply the ratios by a Jenkins total biomass estimate to get component values.
+Note that `coarse_root` here is a Jenkins-derived estimate and uses different
+equations than `rootCalc()`, which applies Li et al. (2003):
 
 ```{r}
 jenkins_total <- suppressMessages(
