@@ -3,21 +3,21 @@ library(testthat)
 # --- validateSpecies ---
 
 test_that("validateSpecies passes silently for valid Ung species", {
-  expect_silent(validateSpecies("PSEU_MEN", "ung_eqn_1"))
-  expect_silent(validateSpecies("TSUG_HET", "ung_eqn_2"))
+  expect_silent(validateSpecies("PSEU_MEN", "ung_1"))
+  expect_silent(validateSpecies("TSUG_HET", "ung_2"))
 })
 
 test_that("validateSpecies aborts for species not in Ung data", {
-  expect_error(validateSpecies("INVALID_SP", "ung_eqn_1"))
+  expect_error(validateSpecies("INVALID_SP", "ung_1"))
 })
 
 test_that("validateSpecies aborts when Ung species used with Lambert method", {
   # PSEU_MEN is a BC species in UNG data, not in LAMBERT data
-  expect_error(validateSpecies("PSEU_MEN", "lambert_eqn_1"))
+  expect_error(validateSpecies("PSEU_MEN", "lambert_1"))
 })
 
 test_that("validateSpecies handles vector of species", {
-  expect_silent(validateSpecies(c("PSEU_MEN", "TSUG_HET"), "ung_eqn_1"))
+  expect_silent(validateSpecies(c("PSEU_MEN", "TSUG_HET"), "ung_1"))
 })
 
 # --- ungEqn ---

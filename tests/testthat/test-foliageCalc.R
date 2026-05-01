@@ -19,14 +19,14 @@ test_that("foliageCalc aborts for invalid species", {
   bad <- data.frame(SPECIES = "INVALID", DBH = 10.0, HEIGHT = 10.0,
                     APPEARANCE = 1, CROWN_COND = 1)
   expect_error(
-    foliageCalc(bad, eval = "ung_eqn_1", species = "SPECIES",
+    foliageCalc(bad, eval = "ung_1", species = "SPECIES",
                 dbh = "DBH", crown_cond = "CROWN_COND")
   )
 })
 
 test_that("foliageCalc aborts when height-based equation is used without height", {
   expect_error(
-    foliageCalc(fo_data, eval = "ung_eqn_2", species = "SPECIES", dbh = "DBH",
+    foliageCalc(fo_data, eval = "ung_2", species = "SPECIES", dbh = "DBH",
                 crown_cond = "CROWN_COND", output = "biomass", decay = FALSE),
     regexp = "height"
   )
@@ -35,7 +35,7 @@ test_that("foliageCalc aborts when height-based equation is used without height"
 test_that("foliageCalc aborts when decay = TRUE and appearance is not provided", {
   expect_error(
     suppressMessages(
-      foliageCalc(fo_data, eval = "ung_eqn_1", species = "SPECIES", dbh = "DBH",
+      foliageCalc(fo_data, eval = "ung_1", species = "SPECIES", dbh = "DBH",
                   crown_cond = "CROWN_COND", output = "biomass", decay = TRUE)
     ),
     regexp = "appearance"
@@ -45,7 +45,7 @@ test_that("foliageCalc aborts when decay = TRUE and appearance is not provided",
 test_that("foliageCalc aborts on invalid output value", {
   expect_error(
     suppressMessages(
-      foliageCalc(fo_data, eval = "ung_eqn_1", species = "SPECIES", dbh = "DBH",
+      foliageCalc(fo_data, eval = "ung_1", species = "SPECIES", dbh = "DBH",
                   crown_cond = "CROWN_COND", output = "invalid", decay = FALSE)
     ),
     regexp = "output"
@@ -54,7 +54,7 @@ test_that("foliageCalc aborts on invalid output value", {
 
 test_that("foliageCalc returns numeric vector with one value per row", {
   result <- suppressMessages(
-    foliageCalc(fo_data, eval = "ung_eqn_1", species = "SPECIES",
+    foliageCalc(fo_data, eval = "ung_1", species = "SPECIES",
                 dbh = "DBH", crown_cond = "CROWN_COND",
                 appearance = "APPEARANCE", output = "biomass", decay = FALSE)
   )
@@ -64,7 +64,7 @@ test_that("foliageCalc returns numeric vector with one value per row", {
 
 test_that("foliageCalc returns non-negative values", {
   result <- suppressMessages(
-    foliageCalc(fo_data, eval = "ung_eqn_1", species = "SPECIES",
+    foliageCalc(fo_data, eval = "ung_1", species = "SPECIES",
                 dbh = "DBH", crown_cond = "CROWN_COND",
                 appearance = "APPEARANCE", output = "biomass", decay = FALSE)
   )
@@ -73,12 +73,12 @@ test_that("foliageCalc returns non-negative values", {
 
 test_that("foliageCalc carbon output is less than biomass output", {
   biomass <- suppressMessages(
-    foliageCalc(fo_data, eval = "ung_eqn_1", species = "SPECIES",
+    foliageCalc(fo_data, eval = "ung_1", species = "SPECIES",
                 dbh = "DBH", crown_cond = "CROWN_COND",
                 appearance = "APPEARANCE", output = "biomass", decay = FALSE)
   )
   carbon <- suppressMessages(
-    foliageCalc(fo_data, eval = "ung_eqn_1", species = "SPECIES",
+    foliageCalc(fo_data, eval = "ung_1", species = "SPECIES",
                 dbh = "DBH", crown_cond = "CROWN_COND",
                 appearance = "APPEARANCE", output = "carbon", decay = FALSE)
   )
@@ -89,18 +89,18 @@ test_that("foliageCalc returns 0 for snag (appearance > 5)", {
   snag <- data.frame(SPECIES = "PSEU_MEN", DBH = 17.4, HEIGHT = 10.9,
                      APPEARANCE = 6, CROWN_COND = 1)
   result <- suppressMessages(
-    foliageCalc(snag, eval = "ung_eqn_1", species = "SPECIES",
+    foliageCalc(snag, eval = "ung_1", species = "SPECIES",
                 dbh = "DBH", crown_cond = "CROWN_COND",
                 appearance = "APPEARANCE", output = "biomass", decay = FALSE)
   )
   expect_equal(result, 0)
 })
 
-test_that("foliageCalc returns correct known value for PSEU_MEN ung_eqn_1", {
+test_that("foliageCalc returns correct known value for PSEU_MEN ung_1", {
   single <- data.frame(SPECIES = "PSEU_MEN", DBH = 10.0, HEIGHT = 10.0,
                        APPEARANCE = 1, CROWN_COND = 1)
   result <- suppressMessages(
-    foliageCalc(single, eval = "ung_eqn_1", species = "SPECIES",
+    foliageCalc(single, eval = "ung_1", species = "SPECIES",
                 dbh = "DBH", crown_cond = "CROWN_COND",
                 appearance = "APPEARANCE", output = "biomass", decay = FALSE)
   )
