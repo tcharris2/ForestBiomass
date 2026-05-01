@@ -12,7 +12,8 @@ woodCalc(
   species,
   appearance = NULL,
   output = "biomass",
-  decay = TRUE
+  decay = TRUE,
+  plot_radius = 11.28
 )
 }
 \arguments{
@@ -31,9 +32,12 @@ within British Columbia and use Lambert equations for species found in Eastern C
 
 \item{appearance}{Optional. Required when decay = TRUE. Column within data where tree appearance is specified.}
 
-\item{output}{Either "biomass" (default) or "carbon". Biomass gives values in Kg. Carbon gives values in Mg/ha.}
+\item{output}{One of "biomass" (kg, default), "biomass Mg/ha", "carbon" (kg), or "carbon Mg/ha".}
 
 \item{decay}{Logical with default = TRUE. Should the decay class reduction factor be applied?}
+
+\item{plot_radius}{Plot radius in metres. Required when output is "biomass Mg/ha" or "carbon Mg/ha".
+Must be one of 3.99, 5.64, 7.98, or 11.28. Default 11.28 m.}
 }
 \value{
 A vector.

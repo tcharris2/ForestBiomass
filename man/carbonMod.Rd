@@ -2,18 +2,20 @@
 % Please edit documentation in R/carbonMod.R
 \name{carbonMod}
 \alias{carbonMod}
-\title{Internal Function: Biomass/Carbon output selection}
+\title{Internal Function: Biomass/Carbon output modifier}
 \usage{
-carbonMod(output)
+carbonMod(output, plot_radius = 11.28)
 }
 \arguments{
-\item{output}{"biomass" or "carbon"}
+\item{output}{One of "biomass", "biomass Mg/ha", "carbon", or "carbon Mg/ha".}
+
+\item{plot_radius}{Plot radius in metres. One of 3.99, 5.64, 7.98, or 11.28. Default 11.28 m.}
 }
 \value{
-A parameter to modify function output to return either biomass (Kg) or carbon (Mg/ha)
+A numeric multiplier applied to raw allometric output (kg) to reach the requested units.
 }
 \description{
-Internal Function: Biomass/Carbon output selection
+Internal Function: Biomass/Carbon output modifier
 }
 \examples{
 carbonMod("biomass")
