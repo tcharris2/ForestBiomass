@@ -10,3 +10,5 @@ vignettes/*.html
 
 # Claude Code internal tooling
 .claude/
+CLAUDE.md
+docs/
