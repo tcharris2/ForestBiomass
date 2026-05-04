@@ -51,48 +51,292 @@
 <div class="row">
   <main id="main" class="col-md-9"><p><img src="reference/figures/Designer2.png" alt="" width="433px" style="display: block; margin: auto;"></p>
 <div class="section level1">
-<div class="page-header"><h1 id="forest-biomass-package">Forest Biomass Package<a class="anchor" aria-label="anchor" href="#forest-biomass-package"></a>
+<div class="page-header"><h1 id="forestbiomass">ForestBiomass<a class="anchor" aria-label="anchor" href="#forestbiomass"></a>
 </h1></div>
 <!-- badges: start -->
-<!-- badges: end -->
-<p>Description: A package developed to convert field data to forest biomass</p>
-<p>Principal Author: Thomson Harris - <a href="mailto:thomsonharris@gmail.com" class="email">thomsonharris@gmail.com</a></p>
+
+<p><strong>ForestBiomass</strong> is an R package for estimating tree biomass and carbon in Canadian temperate forests. It implements hierarchical allometric equations at the component level (wood, bark, branches, foliage) and supports total above-ground and below-ground biomass estimation. Decay class reduction factors can be applied to standing dead wood.</p>
 <div class="section level2">
-<h2 id="release-state">Release State:<a class="anchor" aria-label="anchor" href="#release-state"></a>
+<h2 id="scientific-sources">Scientific Sources<a class="anchor" aria-label="anchor" href="#scientific-sources"></a>
 </h2>
-<p>This package is under current development and changes are expected rapidly.</p>
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr>
+<th>Equations</th>
+<th>Reference</th>
+<th>Coverage</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Ung et al. (2008)</td>
+<td><em>Canadian Journal of Forest Research</em></td>
+<td>BC and national species</td>
+</tr>
+<tr>
+<td>Lambert et al. (2005)</td>
+<td><em>Canadian Journal of Forest Research</em></td>
+<td>Eastern Canada species</td>
+</tr>
+<tr>
+<td>Jenkins et al. (2003)</td>
+<td>
+<em>Forest Science</em> 49(1): 12–35</td>
+<td>National-scale US estimates</td>
+</tr>
+<tr>
+<td>Li et al. (2003)</td>
+<td>
+<em>Canadian Journal of Forest Research</em> 33(1): 126–136</td>
+<td>Root biomass</td>
+</tr>
+<tr>
+<td>Harmon et al. (2011)</td>
+<td>Appendix D</td>
+<td>Decay class reduction factors</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level2">
-<h2 id="current-uses">Current Uses:<a class="anchor" aria-label="anchor" href="#current-uses"></a>
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"tcharris2/ForestBiomass"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="quick-start">Quick Start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
+</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tcharris2.github.io/ForestBiomass/">ForestBiomass</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Use the built-in sample dataset</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">sample_trees</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Total above-ground biomass (Ung et al. 2008, DBH only)</span></span>
+<span><span class="fu"><a href="reference/treeCalc.html">treeCalc</a></span><span class="op">(</span></span>
+<span>  data     <span class="op">=</span> <span class="va">sample_trees</span>,</span>
+<span>  eval     <span class="op">=</span> <span class="st">"ung_1"</span>,</span>
+<span>  dbh      <span class="op">=</span> <span class="st">"DBH"</span>,</span>
+<span>  species  <span class="op">=</span> <span class="st">"SPECIES"</span>,</span>
+<span>  output   <span class="op">=</span> <span class="st">"biomass"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Convert to carbon in Mg/ha</span></span>
+<span><span class="fu"><a href="reference/treeCalc.html">treeCalc</a></span><span class="op">(</span></span>
+<span>  data        <span class="op">=</span> <span class="va">sample_trees</span>,</span>
+<span>  eval        <span class="op">=</span> <span class="st">"ung_1"</span>,</span>
+<span>  dbh         <span class="op">=</span> <span class="st">"DBH"</span>,</span>
+<span>  species     <span class="op">=</span> <span class="st">"SPECIES"</span>,</span>
+<span>  appearance  <span class="op">=</span> <span class="st">"APPEARANCE"</span>,</span>
+<span>  output      <span class="op">=</span> <span class="st">"carbon Mg/ha"</span>,</span>
+<span>  decay       <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  plot_radius <span class="op">=</span> <span class="fl">11.28</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a>
 </h2>
 <div class="section level3">
-<h3 id="tree-biomass">Tree Biomass<a class="anchor" aria-label="anchor" href="#tree-biomass"></a>
+<h3 id="above-ground-biomass">Above-Ground Biomass<a class="anchor" aria-label="anchor" href="#above-ground-biomass"></a>
 </h3>
-<p>Supported:</p>
-<ul>
-<li><p>Woody stem</p></li>
-<li><p>Foliage</p></li>
-<li><p>Bark</p></li>
-<li><p>Branches</p></li>
-</ul>
-<p>Undeveloped:</p>
-<ul>
-<li>Roots</li>
-</ul>
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr>
+<th>Function</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code><a href="reference/treeCalc.html">treeCalc()</a></code></td>
+<td>Total above-ground biomass (sum of all components)</td>
+</tr>
+<tr>
+<td><code><a href="reference/woodCalc.html">woodCalc()</a></code></td>
+<td>Woody stem biomass</td>
+</tr>
+<tr>
+<td><code><a href="reference/barkCalc.html">barkCalc()</a></code></td>
+<td>Bark biomass (optional partial-loss adjustment via <code>rem_bark</code>)</td>
+</tr>
+<tr>
+<td><code><a href="reference/branchCalc.html">branchCalc()</a></code></td>
+<td>Branch biomass</td>
+</tr>
+<tr>
+<td><code><a href="reference/foliageCalc.html">foliageCalc()</a></code></td>
+<td>Foliage biomass</td>
+</tr>
+</tbody>
+</table>
+<p>All component functions accept the same core arguments and produce results that sum exactly to <code><a href="reference/treeCalc.html">treeCalc()</a></code> output.</p>
+</div>
+<div class="section level3">
+<h3 id="below-ground-biomass">Below-Ground Biomass<a class="anchor" aria-label="anchor" href="#below-ground-biomass"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr>
+<th>Function</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td><code><a href="reference/rootCalc.html">rootCalc()</a></code></td>
+<td>Root biomass using Li et al. (2003); takes AGB output from <code><a href="reference/treeCalc.html">treeCalc()</a></code>
+</td>
+</tr></tbody>
+</table>
+</div>
+<div class="section level3">
+<h3 id="utilities">Utilities<a class="anchor" aria-label="anchor" href="#utilities"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr>
+<th>Function</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td><code><a href="reference/jenkinsRatio.html">jenkinsRatio()</a></code></td>
+<td>Decompose total biomass into component proportions (Jenkins et al. 2003)</td>
+</tr></tbody>
+</table>
 </div>
 </div>
 <div class="section level2">
-<h2 id="future-uses">Future Uses:<a class="anchor" aria-label="anchor" href="#future-uses"></a>
+<h2 id="key-arguments">Key Arguments<a class="anchor" aria-label="anchor" href="#key-arguments"></a>
 </h2>
-<div class="section level3">
-<h3 id="section"></h3>
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr>
+<th>Argument</th>
+<th>Description</th>
+<th>Values</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>eval</code></td>
+<td>Equation set</td>
+<td>
+<code>"ung_1"</code>, <code>"ung_2"</code>, <code>"lambert_1"</code>, <code>"lambert_2"</code>, <code>"jenkins"</code>
+</td>
+</tr>
+<tr>
+<td><code>output</code></td>
+<td>Output type and unit</td>
+<td>
+<code>"biomass"</code>, <code>"biomass Mg/ha"</code>, <code>"carbon"</code>, <code>"carbon Mg/ha"</code>
+</td>
+</tr>
+<tr>
+<td><code>decay</code></td>
+<td>Apply decay class reduction (Harmon et al. 2011)</td>
+<td>
+<code>TRUE</code> / <code>FALSE</code>
+</td>
+</tr>
+<tr>
+<td><code>plot_radius</code></td>
+<td>Fixed-area plot radius for per-hectare outputs (m)</td>
+<td>
+<code>3.99</code>, <code>5.64</code>, <code>7.98</code>, <code>11.28</code>
+</td>
+</tr>
+<tr>
+<td><code>appearance</code></td>
+<td>NFI tree appearance code (1–7)</td>
+<td>Required when <code>decay = TRUE</code>
+</td>
+</tr>
+<tr>
+<td><code>crown_cond</code></td>
+<td>NFI crown condition code (1–5)</td>
+<td>Required for branch and foliage</td>
+</tr>
+</tbody>
+</table>
+<p>Species are identified by <strong>NFI species codes</strong>. Supported species vary by equation set — see <code><a href="reference/treeCalc.html">?treeCalc</a></code> or the vignettes for full species lists.</p>
 </div>
-<div class="section level3">
-<h3 id="section-1"></h3>
+<div class="section level2">
+<h2 id="vignettes">Vignettes<a class="anchor" aria-label="anchor" href="#vignettes"></a>
+</h2>
+<ul>
+<li>
+<strong>Getting Started</strong> — basic workflow, output options, equation set comparison, decay adjustment</li>
+<li>
+<strong>Component Biomass</strong> — individual components, bark loss, Jenkins ratio decomposition</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html" class="external-link">vignette</a></span><span class="op">(</span><span class="st">"getting-started"</span>, package <span class="op">=</span> <span class="st">"ForestBiomass"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html" class="external-link">vignette</a></span><span class="op">(</span><span class="st">"component-biomass"</span>, package <span class="op">=</span> <span class="st">"ForestBiomass"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="section-2"></h3>
-</div>
+<div class="section level2">
+<h2 id="status">Status<a class="anchor" aria-label="anchor" href="#status"></a>
+</h2>
+<p>This package is under active development. The API is subject to change.</p>
+<table class="table">
+<thead><tr>
+<th>Component</th>
+<th>Function</th>
+<th>Status</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Woody stem</td>
+<td><code><a href="reference/woodCalc.html">woodCalc()</a></code></td>
+<td>Complete</td>
+</tr>
+<tr>
+<td>Bark</td>
+<td><code><a href="reference/barkCalc.html">barkCalc()</a></code></td>
+<td>Complete</td>
+</tr>
+<tr>
+<td>Branches</td>
+<td><code><a href="reference/branchCalc.html">branchCalc()</a></code></td>
+<td>Complete</td>
+</tr>
+<tr>
+<td>Foliage</td>
+<td><code><a href="reference/foliageCalc.html">foliageCalc()</a></code></td>
+<td>Complete</td>
+</tr>
+<tr>
+<td>Total AGB</td>
+<td><code><a href="reference/treeCalc.html">treeCalc()</a></code></td>
+<td>Complete</td>
+</tr>
+<tr>
+<td>Root biomass</td>
+<td><code><a href="reference/rootCalc.html">rootCalc()</a></code></td>
+<td>Complete</td>
+</tr>
+<tr>
+<td>Component ratios</td>
+<td><code><a href="reference/jenkinsRatio.html">jenkinsRatio()</a></code></td>
+<td>Complete</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><strong>Author:</strong> Thomson Harris — <a href="mailto:thomsonharris@gmail.com" class="email">thomsonharris@gmail.com</a> <strong>License:</strong> MIT</p>
 </div>
 </div>
 
@@ -120,7 +364,12 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
