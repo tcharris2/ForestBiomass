@@ -18,13 +18,15 @@ knitr::include_graphics("man/figures/Designer2.png")
 
 ## Scientific Sources
 
-| Equations | Reference | Coverage |
-|---|---|---|
-| Ung et al. (2008) | *Canadian Journal of Forest Research* | BC and national species |
-| Lambert et al. (2005) | *Canadian Journal of Forest Research* | Eastern Canada species |
-| Jenkins et al. (2003) | *Forest Science* 49(1): 12–35 | National-scale US estimates |
-| Li et al. (2003) | *Canadian Journal of Forest Research* 33(1): 126–136 | Root biomass |
-| Harmon et al. (2011) | Appendix D | Decay class reduction factors |
+***When using this package ensure that the the authors of the allometeric equations are properly cited***
+
+| Reference | Title | Journal / Source | Coverage |
+|---|---|---|---|
+| Ung et al. (2008) | Canadian national biomass equations: new parameter estimates that include British Columbia data | *Canadian Journal of Forest Research* | BC and national species |
+| Lambert et al. (2005) | Canadian national tree aboveground biomass equations | *Canadian Journal of Forest Research* | Eastern Canada species |
+| Jenkins et al. (2003) | National-scale biomass estimators for United States tree species | *Forest Science* 49(1): 12–35 | National-scale US estimates |
+| Li et al. (2003) | Belowground biomass dynamics in the Carbon Budget Model of the Canadian Forest Sector | *Canadian Journal of Forest Research* 33(1): 126–136 | Root biomass |
+| Harmon et al. (2011) | Differences between standing and downed dead tree wood density reduction factors: a comparison across decay classes and tree species | *USDA Forest Service Research Paper NRS-15* | Decay class reduction factors |
 
 ## Installation
 
