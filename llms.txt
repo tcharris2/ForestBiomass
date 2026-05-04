@@ -10,6 +10,9 @@ class reduction factors can be applied to standing dead wood.
 
 ## Scientific Sources
 
+***When using this package ensure that the the authors of the
+allometeric equations are properly cited***
+
 | Equations | Reference | Coverage |
 |----|----|----|
 | Ung et al. (2008) | *Canadian Journal of Forest Research* | BC and national species |
