@@ -5,3 +5,5 @@
 ^site$
 ^pkgdown$
 ^\.github$
+^data_R$
+^CLAUDE\.md$
