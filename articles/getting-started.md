@@ -114,12 +114,12 @@ suppressMessages(
 
 The `plot_radius` argument controls the per-hectare expansion factor:
 
-| Plot radius (m) | Trees per hectare |
-|-----------------|-------------------|
-| 3.99            | 200               |
-| 5.64            | 100               |
-| 7.98            | 50                |
-| 11.28           | 25                |
+| Plot radius (m) | Expansion factor |
+|-----------------|------------------|
+| 3.99            | 200              |
+| 5.64            | 100              |
+| 7.98            | 50               |
+| 11.28           | 25               |
 
 ## Choosing an equation set
 

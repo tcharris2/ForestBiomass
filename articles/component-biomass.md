@@ -125,6 +125,14 @@ using Jenkins et al. (2003) equations. It requires only DBH and species
 — no height or crown condition. Species are classified as softwood or
 hardwood internally.
 
+***Important:*** Do not use the
+[`jenkinsRatio()`](https://tcharris2.github.io/ForestBiomass/reference/jenkinsRatio.md)
+on tree biomass that has been calculated via
+[`treeCalc()`](https://tcharris2.github.io/ForestBiomass/reference/treeCalc.md)
+using either the `ung` or `lambert` method. This will lead to an
+inaccurate calculation as `ung` and `lambert` do not include root
+biomass in their estimation.
+
 ``` r
 
 ratios <- jenkinsRatio(sample_trees, dbh = "DBH", species = "SPECIES")
